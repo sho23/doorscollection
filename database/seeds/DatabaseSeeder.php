@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
 
         // only for test
         $this->call(UserTableSeeder::class);
+        $this->call(EntrancesTableSeeder::class);
     }
 }
