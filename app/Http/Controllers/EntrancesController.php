@@ -8,12 +8,19 @@ use App\Entrance;
 
 class EntrancesController extends Controller
 {
-    public function index() 
+    public function index()
     {
+        return view('entrances.index');
+    }
+
+    public function mypage()
+    {
+        return view('entrances.mypage');
     }
 
     public function show()
     {
+        return view('entrances.show');
     }
 
     public function create()
