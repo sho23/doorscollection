@@ -15,7 +15,8 @@ class EntrancesController extends Controller
 
     public function mypage()
     {
-        return view('entrances.mypage');
+        $entrances = DB::table('entrances')->where('user_id', 1)->orderBy('id', 'asc')->get(); #todo:ユーザID
+        return view('entrances.mypage', compact('entrances'));
     }
 
     public function show()

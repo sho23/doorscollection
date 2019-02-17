@@ -27,27 +27,9 @@
 <div class="card gallery">
     <ul class="row">
         <li class="col-4"><a href="./add.html"><img src="https://placehold.jp/50/757575/ffffff/100x100.png?text=%2B" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="#"><img src="https://placehold.jp/100x100.png" alt="" class="img-fluid"></a></li>
+        @foreach ($entrances as $entrance)
+            <li class="col-4"><a href="#"><img src="{{ asset('/image/entrances/' . $entrance->img_url) }}" alt="" class="img-fluid" width="135" height="135"></a></li>
+        @endforeach
     </ul>
 </div>
 <div class="btn-group d-flex fixed-bottom bg-white">

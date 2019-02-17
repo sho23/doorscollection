@@ -8,7 +8,7 @@ use App\Category;
 
 class HomeController extends Controller
 {
-    public function index() 
+    public function index()
     {
         $categoryList = DB::table('categories')->orderBy('id', 'asc')->get();
         return view('home.index', compact('categoryList'));
