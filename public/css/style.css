@@ -1,0 +1,316 @@
+@charset "utf-8";
+
+/***********  スクロール禁止  ************/
+html {
+	overflow: auto;
+	height: 100%;
+}
+
+/***********  色の定義  ************/
+.bg-info {
+	background-color: #55abee !important;
+}
+.bg-primary {
+	background-color: #3a5897 !important;
+}
+
+.bg-danger {
+	background-color: #ff6190 !important;
+}
+
+/***********  全体の設定  ************/
+body {
+	background-color: #FFF;
+	height: 100%;
+}
+
+p, table, ul {
+	font-size: 13px;
+	color: #6a6a6a !important;
+}
+
+span {
+	font-size: 11px;
+}
+
+.list-group-item {
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.container-fluid {
+	padding: 0;
+}
+
+ul.row {
+	list-style: none;
+}
+
+.bg-gray {
+	background-color: #fafafa;
+}
+
+/***********  1ページ目  ************/
+.top-page {
+	background-color: #ecd259;
+}
+.top .btn {
+	width: 200px;
+}
+/*TODO: TOPページ共通化改修*/
+
+/***********  リスト画面  ************/
+.entrance-list {
+	background-color: #FFF;
+	margin: 30px auto;
+}
+
+.entrance-list .card {
+	border: 0;
+	border-top: 2px;
+}
+
+.select-range {	
+	border-top: 1px solid rgba(0,0,0,.125) !important;	
+}
+
+/***********  リストヘッダー  ************/
+.entrance-list header a span {
+	font-size: 16px;
+	color: #6a6a6a;
+}
+
+.entrance-list header {
+	padding-top: 11px;
+	padding-bottom: 7px;
+	line-height: 36px;
+}
+
+.entrance-list header i {
+	width: 16px;
+}
+
+.bars-menu a {
+	font-size: 20px;
+}
+
+.header-logo {
+	padding: 0;
+}
+
+/***********  カテゴリ選択横スクロール  ************/
+.nav-tabs {
+	border: none;
+}
+
+.nav-tabs-wrap {
+	overflow-y: none;
+	overflow-x: auto;
+	white-space: nowrap;
+	background-color: #FFF;
+}
+
+.nav-tabs-wrap::-webkit-scrollbar {
+	display: none;
+}
+
+.nav-tabs-wrap .nav {
+  display: inline-block;
+  width: 100%;
+}
+
+.nav-tabs-wrap .nav > li {
+  display: inline-block;
+  float: none;
+}
+
+.nav-tabs-wrap img {
+	border-radius: 6px;
+}
+
+/***********  ヘッダー  ************/
+/* 黄色(共通ヘッダー) */
+.entrance-list header {
+	background-color: #ecd259;
+}
+
+.badge-warning {
+	background-color: #e0c153;
+}
+
+/* 白色 (詳細ページ) */
+.detail-page header {
+	background-color: #fafafa;
+}
+
+/***********  検索ボックスまわり  ************/
+.searchbox .card-header {
+	padding: 0;
+}
+
+.searchbox .fas {
+	margin-top: 10px;
+}
+
+.searchbox .form-control {
+	border: none;
+}
+
+.searchbox .nav-tabs-wrap {
+	-webkit-overflow-scrolling: touch;
+}
+
+::-webkit-scrollbar {
+      display: none;
+      -webkit-appearance: none;
+}
+
+.searchbox .form-control {
+	font-size: 14px;
+	height: calc(1.25rem + 2px);
+	margin-top: 7px;
+	padding: .375rem .2rem;
+	color: #6a6a6a !important;
+}
+
+/***********  ギャラリーのレイアウト  ************/
+.gallery li {
+	list-style: none;
+	padding: 1px;
+	position: relative;
+}
+
+.gallery li:last-child {
+	margin-bottom: 60px;
+}
+
+.gallery li p {
+	background-color: #000;
+	opacity: 0.6;
+	position: absolute;
+	bottom: 1px;
+	margin-bottom: 0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: #FFF;
+	width: calc(100% - 2px);
+}
+
+.gallery li p span {
+	padding-left: 10px;
+}
+
+/***********  indexページ グロリアコメント  ************/
+.usage img {
+	width: 100%;
+	max-width: 100px;
+}
+
+/***********  ボタン風ラジオ  ************/
+.button-radio input[type="radio"] {
+  display:none;
+}
+
+.button-radio label {
+  display:inline-block;
+  color:#fff;
+  background-color:#ccc;
+  border-radius: 30px;
+  padding:5px 10px;
+  font-size: 11px;
+  margin-left: 4px;
+}
+
+.button-radio input[type="radio"]:checked + label { 
+  background-color:#e0c153;
+}
+
+/***********  詳細画面  ************/
+.detail ul {
+	list-style: none;
+}
+
+.detail .card {
+	border-radius: 0;
+}
+
+.detail .content {
+	margin-top: 55px;
+	background: #FFF;
+}
+
+.detail header a {
+	font-size: 16px;
+	color: #6a6a6a;
+}
+
+/***********  グロリア吹き出し  ************/
+.avatar-area {
+	border-top: 0;
+	border-bottom: 0;
+}
+
+.balloon-note {
+	padding-left: 0;
+}
+
+.balloon-note p {
+	border-radius: 10px;
+	position: relative;
+	margin: 0;
+}
+
+.balloon-note p::before {
+	content: "";
+	position: absolute;
+	left: -13px;
+	bottom: 0;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 0 20px 20px;
+	border-color: transparent transparent #FFF transparent;
+}
+
+/***********  全箇所共通row設定時左右マージン問題回避  ************/
+.row {
+	margin: 0;
+	padding: 0;
+}
+
+/***********  全箇所共通画像画面幅に応じ表示  ************/
+.img-fluid {
+	width: 100%;
+}
+
+/***********  固定ページ用デザイン  ************/
+.card-center {
+	margin: 50px 20px;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+	color: #6a6a6a;
+}
+
+.fixed-height .container-fluid {
+	height: calc(100% - 88px);
+}
+
+.content {
+	height: 100%;
+	background: #dcdcdc;
+	/*TODO:detailの背景問題*/
+}
+
+.fixed-page {
+	padding-top: 26px;
+}
+
+/***********  新規登録画面フォーム  ************/
+.signup .form-group {
+	margin-bottom: 0;
+}
+
+.signup input {
+	border-radius: 0;
+}
