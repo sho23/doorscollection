@@ -11,11 +11,20 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-		$categories = [["locality", 'エリア'], ["lodging", '住まい'], ["parking", '駐車場'], ["point_of_interest", '重要な地点'], ["sublocality_level_1", "小エリア"], ['cafe', 'カフェ'], ['book_store', '書店'], ['restaurant', 'レストラン'], ['clothing_store', '洋服'], ['health', '医療機関'], ['shopping_mall', 'ショッピングモール'], ['furniture_store', '家具']];
+		$categories = [
+            ["Cafe", 'カフェ', 'cat01.jpg'],
+            ["Restaurant", 'レストラン', 'cat02.jpg'],
+            ["Rental Space", 'レンタルスペース', 'cat03.jpg'],
+            ["Bar", 'バー', 'cat04.jpg'],
+            ["Beauty", "美容", 'cat05.jpg'],
+            ['LIVE HOUSE', 'ライブハウス', 'cat06.jpg'],
+            ['Fitness', 'フィットネス', 'cat07.jpg']
+        ];
 		foreach ($categories as $category) {
             DB::table('categories')->insert([
             	'name' => $category[0],
-            	'ja_name' => $category[1]
+                'ja_name' => $category[1],
+                'img_url' => $category[2]
             ]);
         }
     }

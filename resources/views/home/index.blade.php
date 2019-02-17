@@ -18,12 +18,9 @@
 <div class="searchbox">
     <div class="nav-tabs-wrap">
         <ul class="nav nav-tabs m-2">
-            <li class="mr-2"><a href="#"><img src="https://placehold.jp/125x62.png" alt=""></a></li>
-            <li class="mr-2"><a href="#"><img src="https://placehold.jp/125x62.png" alt=""></a></li>
-            <li class="mr-2"><a href="#"><img src="https://placehold.jp/125x62.png" alt=""></a></li>
-            <li class="mr-2"><a href="#"><img src="https://placehold.jp/125x62.png" alt=""></a></li>
-            <li class="mr-2"><a href="#"><img src="https://placehold.jp/125x62.png" alt=""></a></li>
-            <li class="mr-2"><a href="#"><img src="https://placehold.jp/125x62.png" alt=""></a></li>
+            @foreach ($categoryList as $category)
+                <li class="mr-2"><a href="#"><img src="{{ asset('/image/category/' . $category->img_url) }}" alt="" width="125"></a></li>
+            @endforeach
         </ul>
     </div>
     <div class="card">
