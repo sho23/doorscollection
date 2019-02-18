@@ -9,7 +9,7 @@
             <li class="col-2 pl-4 bars-menu"><a href="#"><i class="fas fa-bars text-light"></i></a></li>
             <li class="col-5 header-logo"><a href="{{ action('HomeController@index') }}"><img src="{{ asset('image/logo_small.png') }}" alt="" hight="27px" width="107px"></a></li>
             <li class="col-5 text-right pr-4">
-                <a href="#"><span class="p-2 badge badge-pill badge-warning"><i class="fas fa-bell text-light"></i></span></a>
+                <a href="{{ action('EntrancesController@create') }}"><span class="p-2 badge badge-pill badge-warning"><i class="fas fa-bell text-light"></i></span></a>
                 <a href="{{ action('EntrancesController@mypage') }}"><span class="ml-2 p-2 badge badge-pill badge-warning"><i class="fas fa-user-alt text-light"></i></span></a>
             </li>
 
@@ -28,12 +28,12 @@
     <ul class="row">
         <li class="col-4"><a href="./add.html"><img src="https://placehold.jp/50/757575/ffffff/100x100.png?text=%2B" alt="" class="img-fluid"></a></li>
         @foreach ($entrances as $entrance)
-            <li class="col-4"><a href="#"><img src="{{ asset('/image/entrances/' . $entrance->img_url) }}" alt="" class="img-fluid" width="135" height="135"></a></li>
+            <li class="col-4"><a href="#"><img src="{{ asset('/storage/img/' . $entrance->img_url) }}" alt="" class="img-fluid" width="135" height="135"></a></li>
         @endforeach
     </ul>
 </div>
 <div class="btn-group d-flex fixed-bottom bg-white">
     <a href="{{ action('EntrancesController@index') }}" class="btn btn-outline-light w-100 text-warning py-3"><i class="fas fa-search mr-3"></i>SEARCH</a>
-    <a href="#" class="btn btn-outline-light w-100 text-danger py-3"><i class="fas fa-camera mr-3"></i>POST</a>
+    <a href="{{ action('EntrancesController@create') }}" class="btn btn-outline-light w-100 text-danger py-3"><i class="fas fa-camera mr-3"></i>POST</a>
 </div>
 @endsection
