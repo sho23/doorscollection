@@ -3,14 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
-use App\Category;
 
 class HomeController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $categoryList = DB::table('categories')->orderBy('id', 'asc')->get();
-        return view('home.index', compact('categoryList'));
+		$categoryList = DB::table('categories')->orderBy('id', 'asc')->get();
+		return view('home.index', compact('categoryList'));
     }
 }
