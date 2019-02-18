@@ -6,20 +6,19 @@
 <div class="fixed-top">
 	<header class="px-2 py-3">
 		<ul class="row">
-			<li class="col-2 align-middle pl-4"><a href="{{ action('EntrancesController@index') }}"><i class="fas fa-arrow-left"></i></a></li>
+			<li class="col-2 align-middle pl-4"><a href="{{ action('EntrancesController@mypage') }}"><i class="fas fa-arrow-left"></i></a></li>
 			<li class="col-2 offset-8 align-middle pr-4"><a href="#"><i class="fas fa-ellipsis-v"></i></a></li>
 		</ul>
 	</header>
 </div>
 <div class="card content">
-	<a href="#"><img src="https://placehold.jp/400x300.png" alt="" class="img-fluid"></a>
+	<a href="#"><img src="{{ asset('/storage/img/' . $entrance->img_url) }}" alt="" class="img-fluid"></a>
 	<table class="m-4">
-		<tr class="align-top"><th class="text-center"><i class="fas fa-university mr-4"></i></th><td class="pb-3">スターバックスコーヒー新石川店</td></tr>
-		<tr class="align-top"><th class="text-center"><i class="fas fa-map-marker-alt mr-4"></i></th><td class="pb-3">225-0003 神奈川県 横浜市青葉区 新石川 2-2-1 たまプラーザテラス サウスプラザ1F</td></tr>
-		<tr class="align-top">
-			<th><i class="fas fa-comment mr-4 text-center"></i></th>
-			<td class="pb-3">駅からすぐ(徒歩2分くらい)の場所にあります。たまプラーザ駅の中央改札を出て左側、バスのロータリーに向かう階段を降りて、 信号の方に進むと出てくる、スポーツジムのある建物の1階です。入り口手前で少しだけ<br>
-			<small>2018/11/2 16:39 に投稿</small></td>
+		<tr class="align-top"><th class="text-center"><i class="fas fa-university mr-4"></i></th><td class="pb-3">{{ $entrance->name }}}</td></tr>
+		<tr class="align-top"><th class="text-center"><i class="fas fa-map-marker-alt mr-4"></i></th><td class="pb-3">{{ $entrance->address }}</td></tr>
+		<tr class="align-top"><th class="text-center"><i class="fas fa-comment mr-4"></i></th>
+			<td class="pb-3">{{ $entrance->detail }}<br>
+			<small>{{ $entrance->created_at }} に投稿</small></td>
 		</tr>
 	</table>
 </div>

@@ -19,9 +19,10 @@ class EntrancesController extends Controller
         return view('entrances.mypage', compact('entrances'));
     }
 
-    public function show()
+    public function show($id)
     {
-        return view('entrances.show');
+        $entrance = DB::table('entrances')->where('id', $id)->where('user_id', 1)->first();#todo:ユーザID
+        return view('entrances.show', compact('entrance'));
     }
 
     public function create()
