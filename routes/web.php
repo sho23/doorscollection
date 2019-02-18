@@ -21,6 +21,6 @@ Route::get('entrances/create', 'EntrancesController@create')->name('entrances.cr
 Route::get('entrances/mypage', 'EntrancesController@mypage')->name('entrances.mypage');
 Route::post('entrances', 'EntrancesController@store')->name('entrances.store');
 Route::get('entrances/', 'EntrancesController@index')->name('entrances.index');
-Route::get('entrances/show', 'EntrancesController@show')->name('entrances.show');
+Route::get('/entrances/{id}/show', 'EntrancesController@show')->name('entrances.show');
 Route::get('entrances/create_desc', 'EntrancesController@createDesc')->name('entrances.createDesc');
 Route::post('entrances/storeDesc', 'EntrancesController@storeDesc')->name('entrances.storeDesc');

@@ -28,7 +28,7 @@
     <ul class="row">
         <li class="col-4"><a href="{{ action('EntrancesController@create') }}"><img src="https://placehold.jp/50/757575/ffffff/100x100.png?text=%2B" alt="" class="img-fluid"></a></li>
         @foreach ($entrances as $entrance)
-            <li class="col-4"><a href="#"><img src="{{ asset('/storage/img/' . $entrance->img_url) }}" alt="" class="img-fluid" width="135" height="135"></a></li>
+            <li class="col-4"><a href="{{ action('EntrancesController@show', $entrance->id) }}"><img src="{{ asset('/storage/img/' . $entrance->img_url) }}" alt="" class="img-fluid" width="135" height="135"></a></li>
         @endforeach
     </ul>
 </div>
