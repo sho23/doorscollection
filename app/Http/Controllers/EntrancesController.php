@@ -15,7 +15,7 @@ class EntrancesController extends Controller
 
     public function mypage()
     {
-        $entrances = DB::table('entrances')->where('user_id', 1)->orderBy('id', 'asc')->get(); #todo:ユーザID
+        $entrances = DB::table('entrances')->where('user_id', 1)->orderBy('id', 'desc')->get(); #todo:ユーザID
         return view('entrances.mypage', compact('entrances'));
     }
 
@@ -33,7 +33,8 @@ class EntrancesController extends Controller
     {
         $filename = $request->filename;
         $suggestList = [];
-        $categoryList = [];
+        $categoryList = DB::table('categories')->orderBy('id', 'asc')->get();
+
 
         $img = url("storage/img/" . $filename);
         $exif = exif_read_data($img);
@@ -74,26 +75,22 @@ class EntrancesController extends Controller
 
     public function storeDesc(Request $request)
     {
-        if (true) {
-            $nameList = explode('-', $request->name);
-            $name = $nameList[1];
-        }
-        var_dump($request->name);
-        var_dump($request->category);
-        var_dump($request->address);
-        var_dump($request->detail);
-        exit();
-        // $this->validate($request, [
-        //     'name' => 'required|max:20',
-        //     'category' => 'required',
-        // ]);
-        // $post = new Post;
+        $this->validate($request, [
+            'name' => 'required|max:40',
+            'category' => 'required',
+            'address' =>  'required',
+            'detail' =>  'required',
+        ]);
+        $entrance = new Entrance;
         // $user = \Auth::user();
-        // $post->user_id = $user->id;
-        // $post->title = $request->title;
-        // $post->detail = $request->detail;
-        // $post->save();
-        // return redirect()->route('questions.create', ['post_id' => $post->id]);
+        $entrance->user_id = 1; #todo
+        $entrance->name = $request->name;
+        $entrance->category_id = $request->category;
+        $entrance->address = $request->address;
+        $entrance->detail = $request->detail;
+        $entrance->img_url = $request->img_url;
+        $entrance->save();
+        return redirect()->route('entrances.mypage');
     }
 
 
