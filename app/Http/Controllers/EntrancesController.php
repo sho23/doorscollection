@@ -76,7 +76,7 @@ class EntrancesController extends Controller
     public function storeDesc(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:40',
+            'name' => 'required',
             'category' => 'required',
             'address' =>  'required',
             'detail' =>  'required',
