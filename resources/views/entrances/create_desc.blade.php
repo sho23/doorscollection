@@ -24,7 +24,7 @@
                         @endif
                         @if ($filename)
                         <input type="hidden" name="img_url" value="{{ $filename }}">
-                        <p><img src="{{ Storage::disk('public')->url('500/500x500_' . $filename) }}" alt="entrance" /></p>
+                        <p><img src="{{ Storage::disk('public')->url('500/500x500_' . $filename) }}" alt="entrance" width='250'></p>
                         @endif
                         <div class="form-group" id="name-input">
                             <label for="name">名前</label>
