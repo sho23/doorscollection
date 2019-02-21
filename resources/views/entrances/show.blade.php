@@ -12,7 +12,7 @@
 	</header>
 </div>
 <div class="card content">
-	<a href="#"><img src="{{ asset('/storage/img/' . $entrance->img_url) }}" alt="" class="img-fluid"></a>
+	<a href="#"><img src="{{ asset('/storage/img/500/500x500_' . $entrance->img_url) }}" alt="" class="img-fluid"></a>
 	<table class="m-4">
 		<tr class="align-top"><th class="text-center"><i class="fas fa-university mr-4"></i></th><td class="pb-3">{{ $entrance->name }}</td></tr>
 		<tr class="align-top"><th class="text-center"><i class="fas fa-map-marker-alt mr-4"></i></th><td class="pb-3">{{ $entrance->address }}</td></tr>

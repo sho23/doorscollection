@@ -199,10 +199,6 @@ ul.row {
 .gallery li p span {
 	padding-left: 10px;
 }
-.gallery li img {
-	height: 135px;
-	object-fit: cover;
-}
 /***********  indexページ グロリアコメント  ************/
 .usage img {
 	width: 100%;
@@ -316,4 +312,8 @@ ul.row {
 
 .signup input {
 	border-radius: 0;
+}
+
+.entrance-form {
+	display: none;
 }
