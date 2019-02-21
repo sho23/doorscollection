@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Image;
 use App\Entrance;
 
 class EntrancesController extends Controller
@@ -33,21 +34,8 @@ class EntrancesController extends Controller
     public function createDesc(Request $request)
     {
         $filename = $request->filename;
-        $suggestList = [];
         $categoryList = DB::table('categories')->orderBy('id', 'asc')->get();
-
-
-        $img = url("storage/img/" . $filename);
-        $exif = exif_read_data($img);
-
-        if (isset($exif['GPSLatitudeRef']) && isset($exif['GPSLatitude'])) {
-            $lat = $this->get_10_from_60_exif($exif['GPSLatitudeRef'], $exif['GPSLatitude']);
-            $lng = $this->get_10_from_60_exif($exif['GPSLongitudeRef'], $exif['GPSLongitude']);
-            $suggest = $this->suggestPlaces($lat . "," . $lng);
-            $suggestList = $suggest[0];
-            $categoryList = $suggest[1];
-        }
-        return view('entrances.create_desc', compact('filename', 'suggestList', 'categoryList'));
+        return view('entrances.create_desc', compact('filename', 'categoryList'));
     }
 
     public function store(Request $request)
@@ -63,8 +51,23 @@ class EntrancesController extends Controller
         ]);
 
         if ($request->file('file')->isValid([])) {
-            $filename = $request->file->store('public/img');
             $filename = $request->file->store('', ['disk' => 'public']);
+            $img = Image::make('storage/img/' . $filename);
+            if ($img->height() > $img->width()) {
+                $height = 500;
+                $width = null;
+            } else {
+                $height = null;
+                $width = 500;
+            }
+            $img->resize($height, $width, function ($constraint) {
+              $constraint->aspectRatio();
+            });
+
+            $img->crop(500, 500);
+            $img->save('storage/img/500/500x500_' . $filename);
+            $img->resize(150, 150);
+            $img->save('storage/img/150/150x150_' . $filename);
             return redirect()->route('entrances.createDesc', ['filename' => $filename]);
         } else {
             return redirect()
