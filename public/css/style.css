@@ -313,3 +313,7 @@ ul.row {
 .signup input {
 	border-radius: 0;
 }
+
+.entrance-form {
+	display: none;
+}

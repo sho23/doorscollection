@@ -26,11 +26,6 @@ class EntrancesController extends Controller
         return view('entrances.show', compact('entrance'));
     }
 
-    public function create()
-    {
-        return view('entrances.create');
-    }
-
     public function createDesc(Request $request)
     {
         $filename = $request->filename;
