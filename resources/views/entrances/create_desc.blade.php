@@ -28,10 +28,11 @@
                         @endif
                         <div class="form-group" id="name-input">
                             <label for="name">名前</label>
-                                <input id="searchMapInput" class="mapControls form-control" name="name" type="text" placeholder="例) タリーズ　たまプラーザ駅前店">
+                                <input id="searchMapInput" class="mapControls form-control" name="mapControls" type="text" placeholder="例) タリーズ　たまプラーザ駅前店">
+                                <input type="hidden" id="name" name="name">
                         </div>
                         <div class="form-group">
-                                <h5 id="name"></h5>
+                                <h5 id="preview-name"></h5>
                         </div>
                         <div class="form-group">
                             <label for="category">店のジャンル</label>
@@ -59,19 +60,19 @@
     </div>
 </div>
 @endsection
-<script src="{{ asset('/js/entrance.js') }}"></script>
+@push('js')
 <script>
     function initMap() {
-        var input = document.getElementById('searchMapInput');
+        var input = $('#searchMapInput')[0];
         var autocomplete = new google.maps.places.Autocomplete(input);
         autocomplete.addListener('place_changed', function() {
             var place = autocomplete.getPlace();
-            document.getElementById('address').value = place.formatted_address;
-            document.getElementById('name').innerHTML = '登録名：' + place.name;
-            document.getElementById("name-input").style.display="none";
-            document.getElementById('lat-span').innerHTML = place.geometry.location.lat();
-            document.getElementById('lon-span').innerHTML = place.geometry.location.lng();
+            $('#address').val(place.formatted_address);
+            $('#name').val(place.name);
+            $('#preview-name').text("登録名：" + place.name);
+            $("#name-input").css('display', 'none');
         });
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap&key=AIzaSyAyd89-4iN5ZVlDG1AlWvUDmEHW37UAxgk&language=ja" async defer></script>
+@endpush
