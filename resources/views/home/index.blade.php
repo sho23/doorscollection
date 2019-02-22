@@ -15,44 +15,65 @@
         </ul>
     </header>
 </div>
+{!! Form::open(['route' => ['home.index'], 'method' => 'get', 'class' => 'search-form']) !!}
+{{ csrf_field() }}
 <div class="searchbox">
     <div class="nav-tabs-wrap">
-        <ul class="nav nav-tabs m-2">
+        <div class="nav nav-tabs m-2 category-list">
             @foreach ($categoryList as $category)
-                <li class="mr-2"><a href="#"><img src="{{ asset('/image/category/' . $category->img_url) }}" alt="" width="125"></a></li>
+                <input type="checkbox" name="categoryIds[]" id="ct-{{ $category->id }}" value="{{ $category->id }}" {{ is_array($categoryIds) && in_array($category->id, $categoryIds) ? 'checked="checked"' : '' }}>
+                <label for="ct-{{ $category->id }}" class="mr-2"><img src="{{ asset('/image/category/' . $category->img_url) }}" alt="" width="125"></label>
             @endforeach
-        </ul>
+        </div>
     </div>
     <div class="card">
         <div class="card-header">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item bg-gray select-range">
-                    <div class="button-radio">
-                        <span class="list-inline-item mx-2 lead"><i class="fas fa-map-marker-alt"></i></span>
-                        <input id="50M" type="radio"name="range" value="50M" checked>
-                        <label for="50M" class="ml-2" >50M圏内</label>
-                        <input id="100M" type="radio" name="range" value="100M">
-                        <label for="100M">100M圏内</label>
-                        <input id="non" type="radio" name="range" value="non">
-                        <label for="non">指定しない</label>
-                    </div>
+                    @if (false)
+                    <li class="list-group-item bg-gray select-range">
+                        <div class="button-radio">
+                            <span class="list-inline-item mx-2 lead"><i class="fas fa-map-marker-alt"></i></span>
+                            <input id="non" type="radio" name="range" value="non" checked>
+                            <label for="non">指定しない</label>
+                            <input id="50M" type="radio"name="range" value="50M">
+                            <label for="50M" class="ml-2" >50M圏内</label>
+                            <input id="100M" type="radio" name="range" value="100M">
+                            <label for="100M">100M圏内</label>
+                        </div>
+                    </li>
+                @endif
+                <li class="list-group-item py-1">
+                    <ul class="list-inline">
+                        <div class="row">
+                            <li class="list-inline-item mx-2 lead"><i class="fas fa-search"></i></li>
+                            <li class="col-10 list-inline-item">
+                                <input type="text" name="keyword" value="{{ $keyword }}" class="keyword form-control align-middle" placeholder="目的地か住所を入力してください">
+                            </li>
+                        </div>
+                    </ul>
                 </li>
                 <li class="list-group-item py-1">
                     <ul class="list-inline">
-                        <form>
-                            <div class="row">
-                                <li class="list-inline-item mx-2 lead"><i class="fas fa-search"></i></li>
-                                <li class="col-10 list-inline-item">
-                                    <input type="text" class="form-control align-middle" placeholder="目的地か住所を入力してください">
-                                </li>
-                            </div>
-                        </form>
+                        <div class="row">
+                            <li class="offset-10 list-inline-item">
+                                <button class="btn btn-info ">検索</button>
+                            </li>
+                        </div>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
 </div><!-- searchbox -->
+{!! Form::close() !!}
+<div class="card gallery">
+    <ul class="row">
+        @foreach ($entrances as $entrance)
+            <li class="col-6"><a href="{{ action('EntrancesController@show', $entrance->id) }}"><img src="{{ asset('/storage/img/150/150x150_' . $entrance->img_url) }}" alt="" class="img-fluid"><p><span class="text-white">{{ $entrance->name }}</span></p></a></li>
+        @endforeach
+    </ul>
+</div>
+@if (false)
 <div class="card usage pb-4 mb-5">
 	<div class="row">
 		<dev class="col-3 offset-1">
@@ -68,6 +89,7 @@
 		</dev>
 	</div>
 </div>
+@endif
 <div class="btn-group d-flex fixed-bottom bg-white">
     <a href="{{ action('HomeController@index') }}" class="btn btn-outline-light w-100 text-warning py-3"><i class="fas fa-search mr-3"></i>SEARCH</a>
     <a href="#" class="upload_button btn btn-outline-light w-100 text-danger py-3"><i class="fas fa-camera mr-3"></i>POST</a>
