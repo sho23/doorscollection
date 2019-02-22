@@ -119,11 +119,6 @@ ul.row {
   width: 100%;
 }
 
-.nav-tabs-wrap .nav > li {
-  display: inline-block;
-  float: none;
-}
-
 .nav-tabs-wrap img {
 	border-radius: 6px;
 }
@@ -180,7 +175,7 @@ ul.row {
 	position: relative;
 }
 
-.gallery li:last-child {
+.gallery ul {
 	margin-bottom: 60px;
 }
 
@@ -316,4 +311,16 @@ ul.row {
 
 .entrance-form {
 	display: none;
+}
+
+.category-list input[type=checkbox] {
+	display: none;
+}
+.category-list label {
+	opacity: 0.5;
+	margin-bottom: 0;
+}
+
+.category-list input:checked + label {
+	opacity: 1;
 }

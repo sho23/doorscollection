@@ -10,6 +10,7 @@
             </div>
         </div>
         {!! Form::open(['route' => ['entrances.storeDesc'], 'method' => 'post']) !!}
+        {{ csrf_field() }}
             <div class="row">
                 <div class="card mb-2 mx-2" style="width: 100%;">
 					<div class="card-body">

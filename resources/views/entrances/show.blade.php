@@ -6,7 +6,7 @@
 <div class="fixed-top">
 	<header class="px-2 py-3">
 		<ul class="row">
-			<li class="col-2 align-middle pl-4"><a href="{{ action('EntrancesController@mypage') }}"><i class="fas fa-arrow-left"></i></a></li>
+			<li class="col-2 align-middle pl-4"><a href="{{ $prevPage }}"><i class="fas fa-arrow-left"></i></a></li>
 			<li class="col-2 offset-8 align-middle pr-4"><a href="#"><i class="fas fa-ellipsis-v"></i></a></li>
 		</ul>
 	</header>
