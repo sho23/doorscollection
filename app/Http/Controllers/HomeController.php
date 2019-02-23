@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['index']);
     }
 
     /**
@@ -29,7 +29,7 @@ class HomeController extends Controller
         $keyword = Input::get('keyword');
         $categoryIds = Input::get('categoryIds');
 
-		$categoryList = DB::table('categories')->orderBy('id', 'asc')->get();
+               $categoryList = DB::table('categories')->orderBy('id', 'asc')->get();
 
         $entrances = DB::table('entrances')->orderBy('id', 'desc')->get();
         $query = Entrance::query();
@@ -45,6 +45,6 @@ class HomeController extends Controller
         }
         $entrances = $query->paginate(100);
 
-		return view('home.index', compact('categoryList', 'entrances', 'keyword', 'categoryIds'));
+       return view('home.index', compact('categoryList', 'entrances', 'keyword', 'categoryIds'));
     }
 }

@@ -5,15 +5,29 @@
 <div class="fixed-top">
     <header class="px-1">
         <ul class="row">
-            <li class="col-2 pl-4 bars-menu"><a href="#"><i class="fas fa-bars text-light"></i></a></li>
+            <li class="col-2 pl-4 bars-menu"><a href="#sidr" id="simple-menu"><i class="fas fa-bars text-light"></i></a></li>
             <li class="col-5 header-logo"><a href="/"><img src="{{ asset('image/logo_small.png') }}" alt="" hight="27px" width="107px"></a></li>
             <li class="col-5 text-right pr-4">
                 <a href="#"><span class="p-2 badge badge-pill badge-warning"><i class="fas fa-bell text-light"></i></span></a>
                 <a href="{{ action('EntrancesController@mypage') }}"><span class="ml-2 p-2 badge badge-pill badge-warning"><i class="fas fa-user-alt text-light"></i></span></a>
             </li>
-
         </ul>
     </header>
+</div>
+<div id="sidr">
+    <ul>
+        <li class="text-center p-2"><img src="{{ asset('image/ic_gloria.png') }}" class="rounded-circle" alt="" width="100"></li>
+        <li class="text-center"><a href="{{ action('HomeController@index') }}">ホーム</a></li>
+        <li class="text-center"><a href="#">お知らせ</a></li>
+        <li class="text-center"><a href="#">プライバシーポリシー</a></li>
+        <li class="text-center"><a href="#">運営会社</a></li>
+        @guest
+            <li class="text-center"><a href="{{ route('login') }}" class="text-danger"><strong>ログイン</strong></a></li>
+        @else
+            <li class="text-center"><a href="{{ action('EntrancesController@mypage') }}">マイページ</a></li>
+            <li class="text-center"><a href="{{ route('logout') }}" class="text-danger"><strong>ログアウト</strong></a></li>
+        @endguest
+    </ul>
 </div>
 {!! Form::open(['route' => ['home.index'], 'method' => 'get', 'class' => 'search-form']) !!}
 {{ csrf_field() }}
@@ -100,12 +114,15 @@
 @endsection
 @push('js')
     <script>
-        $('.upload_button').click(function(){
+        $('.upload_button').click(function() {
             $('#file').click();
             return false;
         });
        $('#file').change(function() {
             $('.entrance-form').submit();
+        });
+        $(function() {
+            $('#simple-menu').sidr();
         });
     </script>
 @endpush
