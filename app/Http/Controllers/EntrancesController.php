@@ -10,9 +10,14 @@ use Illuminate\Routing\UrlGenerator;
 
 class EntrancesController extends Controller
 {
-    public function index()
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        return view('entrances.index');
+        $this->middleware('auth')->except(['show']);
     }
 
     public function mypage()

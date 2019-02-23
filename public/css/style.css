@@ -324,3 +324,9 @@ ul.row {
 .category-list input:checked + label {
 	opacity: 1;
 }
+
+.fixed-top {
+	right: inherit;
+	left: inherit;
+	width: 100%;
+}
