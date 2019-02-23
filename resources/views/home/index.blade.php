@@ -70,7 +70,7 @@
                     <ul class="list-inline">
                         <div class="row">
                             <li class="offset-10 list-inline-item">
-                                <button class="btn btn-info ">検索</button>
+                                <button class="btn btn-success">検索</button>
                             </li>
                         </div>
                     </ul>

@@ -151,13 +151,6 @@
 @endsection
 @push('js')
     <script>
-        $('.upload_button').click(function() {
-            $('#file').click();
-            return false;
-        });
-       $('#file').change(function() {
-            $('.entrance-form').submit();
-        });
         $(function() {
             $('#simple-menu').sidr();
         });
