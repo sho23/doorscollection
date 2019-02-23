@@ -1,14 +1,36 @@
 @extends('layouts.app')
-@section('title', 'AB診断')
+@section('title', 'グロリアの扉コレクション')
+@section('class', 'entrance-list')
 @section('content')
+<div class="fixed-top">
+    <header class="px-1">
+        <ul class="row">
+            <li class="col-2 pl-4 bars-menu"><a href="#sidr" id="simple-menu"><i class="fas fa-bars text-light"></i></a></li>
+            <li class="col-5 header-logo"><a href="/"><img src="{{ asset('image/logo_small.png') }}" alt="" hight="27px" width="107px"></a></li>
+            <li class="col-5 text-right pr-4">
+                <a href="#"><span class="p-2 badge badge-pill badge-warning"><i class="fas fa-bell text-light"></i></span></a>
+                <a href="{{ action('EntrancesController@mypage') }}"><span class="ml-2 p-2 badge badge-pill badge-warning"><i class="fas fa-user-alt text-light"></i></span></a>
+            </li>
+        </ul>
+    </header>
+</div>
+<div id="sidr">
+    <ul>
+        <li class="text-center p-2"><img src="{{ asset('image/ic_gloria.png') }}" class="rounded-circle" alt="" width="100"></li>
+        <li class="text-center"><a href="{{ action('HomeController@index') }}">ホーム</a></li>
+        <li class="text-center"><a href="#">お知らせ</a></li>
+        <li class="text-center"><a href="{{ action('HomeController@index') }}">プライバシーポリシー</a></li>
+        <li class="text-center"><a href="http://team-jokers.tokyo" target="_blank">運営会社</a></li>
+        @guest
+            <li class="text-center"><a href="{{ route('login') }}" class="text-danger"><strong>ログイン</strong></a></li>
+        @else
+            <li class="text-center"><a href="{{ action('EntrancesController@mypage') }}">マイページ</a></li>
+            <li class="text-center"><a href="{{ route('logout') }}" class="text-danger"><strong>ログアウト</strong></a></li>
+        @endguest
+    </ul>
+</div>
 <div id="wrap">
     <div class="container">
-        <div class="card mb-4 text-center" style="width: 100%;">
-            <div class="card-body">
-                <h3 class="card-title">入り口登録</h5>
-                <h5 class="card-text">お店の入り口写真を登録しよう！</h5>
-            </div>
-        </div>
         {!! Form::open(['route' => ['entrances.storeDesc'], 'method' => 'post']) !!}
         {{ csrf_field() }}
             <div class="row">
@@ -52,7 +74,7 @@
                             <input type="text" class="form-control" name="detail" id="detail" value="{{old('detail')}}" placeholder="例) 駅直通の渡り廊下にある。改札徒歩2分">
                         </div>
                         <div class="card-body text-center">
-                            {!! Form::submit('アップロード', ['class' => 'btn btn-primary']) !!}
+                            {!! Form::submit('アップロード', ['class' => 'btn btn-success']) !!}
                         </div>
 					</div>
 				</div>
@@ -74,6 +96,9 @@
             $("#name-input").css('display', 'none');
         });
     }
+    $(function() {
+        $('#simple-menu').sidr();
+    });
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap&key=AIzaSyAyd89-4iN5ZVlDG1AlWvUDmEHW37UAxgk&language=ja" async defer></script>
 @endpush

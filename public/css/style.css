@@ -317,12 +317,13 @@ ul.row {
 	display: none;
 }
 .category-list label {
-	opacity: 0.5;
+	background: #2610bd;
+	border-radius: 6px;
 	margin-bottom: 0;
 }
 
-.category-list input:checked + label {
-	opacity: 1;
+.category-list input:checked + label img {
+	opacity: 0.8;
 }
 
 .fixed-top {
