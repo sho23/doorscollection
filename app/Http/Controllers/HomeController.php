@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Entrance;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -29,7 +30,7 @@ class HomeController extends Controller
         $keyword = Input::get('keyword');
         $categoryIds = Input::get('categoryIds');
 
-               $categoryList = DB::table('categories')->orderBy('id', 'asc')->get();
+        $categoryList = DB::table('categories')->orderBy('id', 'asc')->get();
 
         $entrances = DB::table('entrances')->orderBy('id', 'desc')->get();
         $query = Entrance::query();
@@ -43,7 +44,7 @@ class HomeController extends Controller
         if(!empty($categoryIds)){
             $query->whereIn('category_id', $categoryIds);
         }
-        $entrances = $query->paginate(100);
+        $entrances = $query->paginate(20);
 
        return view('home.index', compact('categoryList', 'entrances', 'keyword', 'categoryIds'));
     }

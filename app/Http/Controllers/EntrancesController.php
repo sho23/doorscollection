@@ -7,6 +7,7 @@ use DB;
 use Image;
 use App\Entrance;
 use Illuminate\Routing\UrlGenerator;
+use Illuminate\Support\Facades\Auth;
 
 class EntrancesController extends Controller
 {
@@ -22,15 +23,21 @@ class EntrancesController extends Controller
 
     public function mypage()
     {
-        $entrances = DB::table('entrances')->where('user_id', 1)->orderBy('id', 'desc')->get(); #todo:ユーザID
-        return view('entrances.mypage', compact('entrances'));
+        $user = Auth::user();
+        $query = Entrance::query();
+        $query->where('user_id', $user->id)->orderBy('id', 'desc');
+        $entranceFirstLine = $query->take(2)->get();
+        $entrances = $query->whereNotIn('id', [$entranceFirstLine[0]->id, $entranceFirstLine[1]->id])->paginate(18);
+
+        return view('entrances.mypage', compact('entrances', 'entranceFirstLine'));
     }
 
     public function show($id)
     {
+        $user = Auth::user();
         $entrance = DB::table('entrances')->where('id', $id)->where('user_id', 1)->first();#todo:ユーザID
         $prevPage = url()->previous();
-        return view('entrances.show', compact('entrance', 'prevPage'));
+        return view('entrances.show', compact('entrance', 'prevPage', 'user'));
     }
 
     public function createDesc(Request $request)
