@@ -81,11 +81,14 @@
 </div><!-- searchbox -->
 {!! Form::close() !!}
 <div class="card gallery">
-    <ul class="row">
-        @foreach ($entrances as $entrance)
-            <li class="col-6"><a href="{{ action('EntrancesController@show', $entrance->id) }}"><img src="{{ asset('/storage/img/150/150x150_' . $entrance->img_url) }}" alt="" class="img-fluid"><p><span class="text-white">{{ $entrance->name }}</span></p></a></li>
-        @endforeach
-    </ul>
+    <div class="infinite-scroll">
+        <ul class="row">
+            @foreach ($entrances as $entrance)
+                <li class="col-6"><a href="{{ action('EntrancesController@show', $entrance->id) }}"><img src="{{ asset('/storage/img/150/150x150_' . $entrance->img_url) }}" alt="" class="img-fluid"><p><span class="text-white">{{ $entrance->name }}</span></p></a></li>
+            @endforeach
+        </ul>
+        {{ $entrances->links() }}
+    </div>
 </div>
 @if (false)
 <div class="card usage pb-4 mb-5">
@@ -123,6 +126,18 @@
         });
         $(function() {
             $('#simple-menu').sidr();
+            $('ul.pagination').hide();
+            $('.infinite-scroll').jscroll({
+                autoTrigger: true,
+                debug: true,
+                loadingHtml: '<div class="col-12 text-center"><img class="mx-auto" src="/image/loading.gif" alt="Loading..." /></div>',
+                padding: 0,
+                nextSelector: '.pagination li.active + li a',
+                contentSelector: '.infinite-scroll',
+                callback: function() {
+                    $('ul.pagination').remove();
+                }
+            });
         });
     </script>
 @endpush
