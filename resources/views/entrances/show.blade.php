@@ -7,7 +7,9 @@
 	<header class="px-2 py-3">
 		<ul class="row">
 			<li class="col-2 align-middle pl-4"><a href="{{ $prevPage }}"><i class="fas fa-arrow-left"></i></a></li>
-			<li class="col-2 offset-8 align-middle pr-4"><a href="#"><i class="fas fa-ellipsis-v"></i></a></li>
+			@if($entrance->user_id == $user->id)
+				<li class="col-2 offset-8 align-middle pr-4"><a href=""><i class="fas fa-ellipsis-v"></i></a></li>
+			@endif
 		</ul>
 	</header>
 </div>
@@ -32,9 +34,9 @@
 </div>
 <div class="card">
 	<ul class="row">
-		<li class="col py-3 text-white bg-info"><i class="fab fa-twitter"></i></li>
-		<li class="col py-3 text-white bg-primary"><i class="fab fa-facebook-f"></i></li>
-		<li class="col py-3 text-white bg-danger"><i class="fas fa-heart"></i></li>
+		<li class="col py-3 text-white bg-info"><i class="fab fa-twitter"></i>　Twitter</li>
+		<li class="col py-3 text-white bg-primary"><i class="fab fa-facebook-f"></i>　Facebook</li>
+		<li class="col py-3 text-white bg-danger"><i class="fas fa-heart"></i>　Like</li>
 	</ul>
 </div>
 @endsection
