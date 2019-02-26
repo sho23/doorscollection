@@ -35,7 +35,7 @@ class EntrancesController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        $entrance = DB::table('entrances')->where('id', $id)->where('user_id', 1)->first();#todo:ユーザID
+        $entrance = DB::table('entrances')->where('id', $id)->first();
         $prevPage = url()->previous();
         return view('entrances.show', compact('entrance', 'prevPage', 'user'));
     }
