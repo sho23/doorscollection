@@ -40,7 +40,7 @@
     </script>
 </head>
 <body class="@yield('parentClass', 'fixed-page')">
-    <div id="loading"><img src="/image/loading.gif"></div>
+    <div id="loading"><img src="{{ asset('image/loading.gif') }}"></div>
     <div class="container-fluid">
         <div class="@yield('class', '')">
             @yield('content')
