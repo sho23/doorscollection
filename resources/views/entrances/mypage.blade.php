@@ -16,21 +16,6 @@
         </ul>
     </header>
 </div>
-<div id="sidr">
-    <ul>
-        <li class="text-center p-2"><img src="{{ asset('image/ic_gloria.png') }}" class="rounded-circle" alt="" width="100"></li>
-        <li class="text-center"><a href="{{ action('HomeController@index') }}">ホーム</a></li>
-        <li class="text-center"><a href="#">お知らせ</a></li>
-        <li class="text-center"><a href="{{ action('HomeController@index') }}">プライバシーポリシー</a></li>
-        <li class="text-center"><a href="http://team-jokers.tokyo" target="_blank">運営会社</a></li>
-        @guest
-            <li class="text-center"><a href="{{ route('login') }}" class="text-danger"><strong>ログイン</strong></a></li>
-        @else
-            <li class="text-center"><a href="{{ action('EntrancesController@mypage') }}">マイページ</a></li>
-            <li class="text-center"><a href="{{ route('logout') }}" class="text-danger"><strong>ログアウト</strong></a></li>
-        @endguest
-    </ul>
-</div>
 <div class="card bg-gray avatar-area py-2">
     <div class="row my-2">
         <div class="col-4 text-center"><img src="{{ asset('image/ic_gloria.png') }}" class="rounded-circle" alt="" hegith="80px" width="80px"></div>
@@ -55,6 +40,7 @@
     </div>
 </div>
 <div class="btn-group d-flex fixed-bottom bg-white">
+    <p class="mx-auto my-2 copywriter">© 2019 JOKERS LLC.</p>
     <a href="{{ action('HomeController@index') }}" class="btn btn-outline-light w-100 text-warning py-3"><i class="fas fa-search mr-3"></i>SEARCH</a>
     <a href="#" class="upload_button btn btn-outline-light w-100 text-danger py-3"><i class="fas fa-camera mr-3"></i>POST</a>
 </div>
@@ -72,7 +58,6 @@
             $('.entrance-form').submit();
         });
         $(function() {
-            $('#simple-menu').sidr();
             $('ul.pagination').hide();
             $('.infinite-scroll').jscroll({
                 autoTrigger: true,
