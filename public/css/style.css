@@ -175,10 +175,6 @@ ul.row {
 	position: relative;
 }
 
-.gallery {
-	margin-bottom: 60px;
-}
-
 .gallery li p {
 	background-color: #000;
 	opacity: 0.6;
@@ -330,4 +326,19 @@ ul.row {
 	right: inherit;
 	left: inherit;
 	width: 100%;
+}
+
+.infinite-scroll {
+	margin-bottom: 60px;
+}
+
+.container-fluid {
+	display: none;
+}
+
+#loading {
+	position:absolute;
+	left:50%;
+	top:20%;
+	margin-left:-30px;
 }
