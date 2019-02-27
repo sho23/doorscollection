@@ -28,19 +28,17 @@
     <div class="card">
         <div class="card-header">
             <ul class="list-group list-group-flush">
-                    @if (false)
-                    <li class="list-group-item bg-gray select-range">
-                        <div class="button-radio">
-                            <span class="list-inline-item mx-2 lead"><i class="fas fa-map-marker-alt"></i></span>
-                            <input id="non" type="radio" name="range" value="non" checked>
-                            <label for="non">指定しない</label>
-                            <input id="50M" type="radio"name="range" value="50M">
-                            <label for="50M" class="ml-2" >50M圏内</label>
-                            <input id="100M" type="radio" name="range" value="100M">
-                            <label for="100M">100M圏内</label>
-                        </div>
-                    </li>
-                @endif
+                <li class="list-group-item bg-gray select-range">
+                    <div class="button-radio">
+                        <span class="list-inline-item mx-2 lead"><i class="fas fa-map-marker-alt"></i></span>
+                        <input id="non" type="radio" name="range" value="0" {{ empty($range) ? 'checked="checked"' : '' }}>
+                        <label for="non">指定しない</label>
+                        <input id="1km" type="radio" name="range" value="1" {{ $range == 1 ? 'checked="checked"' : '' }}>
+                        <label for="1km">1km圏内</label>
+                        <input id="100m" type="radio"name="range" value="2" {{ $range == 2 ? 'checked="checked"' : '' }}>
+                        <label for="100m" class="ml-2" >100m圏内</label>
+                    </div>
+                </li>
                 <li class="list-group-item py-1">
                     <ul class="list-inline">
                         <div class="row">
@@ -72,7 +70,7 @@
                 <li class="col-6"><a href="{{ action('EntrancesController@show', $entrance->id) }}"><img src="{{ asset('/storage/img/500/500x500_' . $entrance->img_url) }}" alt="" class="img-fluid"><p><span class="text-white">{{ $entrance->name }}</span></p></a></li>
             @endforeach
         </ul>
-        {{ $entrances->links() }}
+        {{ $entrances->appends(['keyword'=>$keyword, 'categoryIds'=>$categoryIds, 'range' => $range])->render() }}
     </div>
 </div>
 @if (false)

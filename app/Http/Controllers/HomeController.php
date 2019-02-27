@@ -29,10 +29,10 @@ class HomeController extends Controller
     {
         $keyword = Input::get('keyword');
         $categoryIds = Input::get('categoryIds');
+        $range = Input::get('range');
 
         $categoryList = DB::table('categories')->orderBy('id', 'asc')->get();
 
-        $entrances = DB::table('entrances')->orderBy('id', 'desc')->get();
         $query = Entrance::query();
 
         if(!empty($keyword)){
@@ -44,12 +44,44 @@ class HomeController extends Controller
         if(!empty($categoryIds)){
             $query->whereIn('category_id', $categoryIds);
         }
+        if (!empty($range) && in_array($range, [1, 2])) {
+            $latLng = [139.627563, 35.612491]; // TODO:現在地の緯度経度
+            $query->where('lat', '>=', $latLng[0] - 0.0090133);
+            $query->where('lat', '<=', $latLng[0] + 0.0090133);
+            $query->where('lng', '>=', $latLng[1] - 0.0109664);
+            $query->where('lng', '<=', $latLng[1] + 0.0109664);
+            if ($range == 2) { //100M検索の場合
+                $entranceList = $query->get();
+                $distanceList = [];
+                foreach ($entranceList as $entrance) {
+                    $distance = $this->distance($latLng[0], $latLng[1], $entrance->lat, $entrance->lng);
+                    if ($distance < 150) {
+                        $distanceList[] = $entrance->id;
+                    }
+                }
+                $query->whereIn('id', $distanceList);
+            }
+        }
         $entrances = $query->paginate(20);
 
-       return view('home.index', compact('categoryList', 'entrances', 'keyword', 'categoryIds'));
+       return view('home.index', compact('categoryList', 'entrances', 'keyword', 'categoryIds', 'range'));
     }
     public function policy()
     {
         return view('home.policy');
+    }
+
+    private function distance($startLat, $startLng, $endLat, $endLng)
+    {
+        $latDist = ($startLat - $endLat);if($latDist<0)$latDist=$latDist*-1;
+        $lngDist = ($startLng - $endLng);if($lngDist<0)$lngDist=$lngDist*-1;
+
+        //緯度位置における経度量を計算　地球は丸い
+        $m_lng = 30.9221438 * cos($startLat / 180 * pi());
+        if($m_lng<0)$m_lng=$m_lng*-1;
+
+        //移動量を計算
+        $distance = (int)(sqrt(pow(abs($latDist / 0.00027778 * 30.9221438), 2) + pow(abs($lngDist / 0.00027778 * $m_lng), 2)));
+        return $distance;
     }
 }
