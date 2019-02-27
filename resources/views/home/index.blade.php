@@ -16,6 +16,8 @@
 </div>
 {!! Form::open(['route' => ['home.index'], 'method' => 'get', 'class' => 'search-form']) !!}
 {{ csrf_field() }}
+<input type="hidden" name="lat" value="">
+<input type="hidden" name="lng" value="">
 <div class="searchbox">
     <div class="nav-tabs-wrap">
         <div class="nav nav-tabs m-2 category-list">
@@ -123,14 +125,18 @@
             });
 
             if(navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                  console.log('緯度     : ' + position.coords.latitude);
-                  console.log('経度     : ' + position.coords.longitude);
-                  console.log('精度     : ' + position.coords.accuracy);
-                  console.log('移動速度 : ' + position.coords.speed);
-                });
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        $('input[name="lat"]').val(position.coords.latitude);
+                        $('input[name="lng"]').val(position.coords.longitude);
+                    },
+                    function(err) {
+                        $('.select-range').hide();
+                    }
+                );
+            } else {
+                $('.select-range').hide();
             }
-
         });
     </script>
 @endpush

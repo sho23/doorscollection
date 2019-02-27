@@ -18,8 +18,8 @@ class EntrancesTableSeeder extends Seeder
             'address' => '神奈川県横浜市青葉区新石川2-1-15',
             'detail' => '駅直通の渡り廊下にある。改札徒歩2分',
             'img_url' => 'IMG_1970.jpg',
-            'lat' => 139.557580,
-            'lng' => 35.576628,
+            'lng' => 139.557580,
+            'lat' => 35.576628,
             'status' => 1
         ]);
 
@@ -233,8 +233,8 @@ class EntrancesTableSeeder extends Seeder
                 'address' => $entrance[3],
                 'detail' => $entrance[2],
                 'img_url' => $entrance[4],
-                'lat' =>  $entrance[5],
-                'lng' =>  $entrance[6],
+                'lng' =>  $entrance[5],
+                'lat' =>  $entrance[6],
                 'status' => 1
             ]);
         }
