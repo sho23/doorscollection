@@ -121,6 +121,16 @@
                     $('ul.pagination').remove();
                 }
             });
+
+            if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                  console.log('緯度     : ' + position.coords.latitude);
+                  console.log('経度     : ' + position.coords.longitude);
+                  console.log('精度     : ' + position.coords.accuracy);
+                  console.log('移動速度 : ' + position.coords.speed);
+                });
+            }
+
         });
     </script>
 @endpush
