@@ -22,6 +22,8 @@ class CreateEntrancesTable extends Migration
             $table->string('address')->nullable();
             $table->string('detail')->nullable();
             $table->integer('status')->default(0);
+            $table->double('lat', 15, 8);
+            $table->double('lng', 15, 8);
             $table->string('img_url');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
