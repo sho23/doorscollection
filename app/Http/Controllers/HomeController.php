@@ -30,6 +30,8 @@ class HomeController extends Controller
         $keyword = Input::get('keyword');
         $categoryIds = Input::get('categoryIds');
         $range = Input::get('range');
+        $gpsLat = Input::get('lat');
+        $gpsLng = Input::get('lng');
 
         $categoryList = DB::table('categories')->orderBy('id', 'asc')->get();
 
@@ -45,16 +47,15 @@ class HomeController extends Controller
             $query->whereIn('category_id', $categoryIds);
         }
         if (!empty($range) && in_array($range, [1, 2])) {
-            $latLng = [139.627563, 35.612491]; // TODO:現在地の緯度経度
-            $query->where('lat', '>=', $latLng[0] - 0.0090133);
-            $query->where('lat', '<=', $latLng[0] + 0.0090133);
-            $query->where('lng', '>=', $latLng[1] - 0.0109664);
-            $query->where('lng', '<=', $latLng[1] + 0.0109664);
+            $query->where('lng', '>=', $gpsLng - 0.0090133);
+            $query->where('lng', '<=', $gpsLng + 0.0090133);
+            $query->where('lat', '>=', $gpsLat - 0.0109664);
+            $query->where('lat', '<=', $gpsLat + 0.0109664);
             if ($range == 2) { //100M検索の場合
                 $entranceList = $query->get();
                 $distanceList = [];
                 foreach ($entranceList as $entrance) {
-                    $distance = $this->distance($latLng[0], $latLng[1], $entrance->lat, $entrance->lng);
+                    $distance = $this->distance($gpsLat, $gpsLng, $entrance->lat, $entrance->lng);
                     if ($distance < 150) {
                         $distanceList[] = $entrance->id;
                     }
