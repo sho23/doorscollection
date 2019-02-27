@@ -347,6 +347,15 @@ ul.row {
 	display: none;
 }
 
+.entrance-list .auth-form {
+	border: 1px solid #e8ce69;
+}
+
+.auth-form .card-header {
+	color: #FFF;
+	background: #e8ce69;
+}
+
 /*pcのためのCSS*/
 @media (min-width: 480px) {
 	.fixed-bottom {
