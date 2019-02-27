@@ -43,6 +43,9 @@ class EntrancesController extends Controller
     public function createDesc(Request $request)
     {
         $filename = $request->filename;
+        if (!$this->uaSmt() || is_null($filename)) {
+            return redirect('home');
+        }
         $categoryList = DB::table('categories')->orderBy('id', 'asc')->get();
         return view('entrances.create_desc', compact('filename', 'categoryList'));
     }
@@ -61,7 +64,7 @@ class EntrancesController extends Controller
 
         if ($request->file('file')->isValid([])) {
             $filename = $request->file->store('', ['disk' => 'public']);
-            $img = Image::make('storage/img/' . $filename);
+            $img = Image::make('storage/img/' . $filename)->orientate();
             if ($img->height() > $img->width()) {
                 $height = 500;
                 $width = null;
@@ -142,5 +145,16 @@ class EntrancesController extends Controller
             $suggestList[$key][] = $category;
         }
         return array($suggestList, $categoryList);
+    }
+
+    function uaSmt()
+    {
+        $ua = $_SERVER['HTTP_USER_AGENT'];
+        $uaList = array('iPhone','iPad','iPod','Android');
+        foreach ($uaList as $uaSp) {
+            if (strpos($ua, $uaSp) !== false) {
+                return true;
+            }
+        } return false;
     }
 }

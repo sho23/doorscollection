@@ -328,7 +328,7 @@ ul.row {
 	width: 100%;
 }
 
-.infinite-scroll {
+.gallery > .infinite-scroll {
 	margin-bottom: 60px;
 }
 
