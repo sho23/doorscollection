@@ -96,6 +96,8 @@ class EntrancesController extends Controller
             'category' => 'required',
             'address' =>  'required',
             'detail' =>  'required',
+            'lat' =>  'required',
+            'lng' =>  'required',
         ]);
         $entrance = new Entrance;
         // $user = \Auth::user();
@@ -105,6 +107,8 @@ class EntrancesController extends Controller
         $entrance->address = $request->address;
         $entrance->detail = $request->detail;
         $entrance->img_url = $request->img_url;
+        $entrance->lat = $request->lat;
+        $entrance->lng = $request->lng;
         $entrance->save();
         return redirect()->route('entrances.mypage');
     }
