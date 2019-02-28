@@ -14,21 +14,6 @@
         </ul>
     </header>
 </div>
-<div id="sidr">
-    <ul>
-        <li class="text-center p-2"><img src="{{ asset('image/ic_gloria.png') }}" class="rounded-circle" alt="" width="100"></li>
-        <li class="text-center"><a href="{{ action('HomeController@index') }}">ホーム</a></li>
-        <li class="text-center"><a href="#">お知らせ</a></li>
-        <li class="text-center"><a href="{{ action('HomeController@index') }}">プライバシーポリシー</a></li>
-        <li class="text-center"><a href="http://team-jokers.tokyo" target="_blank">運営会社</a></li>
-        @guest
-            <li class="text-center"><a href="{{ route('login') }}" class="text-danger"><strong>ログイン</strong></a></li>
-        @else
-            <li class="text-center"><a href="{{ action('EntrancesController@mypage') }}">マイページ</a></li>
-            <li class="text-center"><a href="{{ route('logout') }}" class="text-danger"><strong>ログアウト</strong></a></li>
-        @endguest
-    </ul>
-</div>
 <div id="wrap">
     <div class="container">
         {!! Form::open(['route' => ['entrances.storeDesc'], 'method' => 'post']) !!}
@@ -49,6 +34,8 @@
                         <input type="hidden" name="img_url" value="{{ $filename }}">
                         <p><img src="{{ Storage::disk('public')->url('500/500x500_' . $filename) }}" alt="entrance" width='250'></p>
                         @endif
+                        <input type="hidden" name="lat" value="">
+                        <input type="hidden" name="lng" value="">
                         <div class="form-group" id="name-input">
                             <label for="name">名前</label>
                                 <input id="searchMapInput" class="mapControls form-control" name="mapControls" type="text" placeholder="例) タリーズ　たまプラーザ駅前店">
@@ -92,13 +79,12 @@
             var place = autocomplete.getPlace();
             $('#address').val(place.formatted_address);
             $('#name').val(place.name);
+            $('input[name="lat"]').val(place.geometry.location.lat());
+            $('input[name="lng"]').val(place.geometry.location.lng());
             $('#preview-name').text("登録名：" + place.name);
             $("#name-input").css('display', 'none');
         });
     }
-    $(function() {
-        $('#simple-menu').sidr();
-    });
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap&key=AIzaSyAyd89-4iN5ZVlDG1AlWvUDmEHW37UAxgk&language=ja" async defer></script>
 @endpush

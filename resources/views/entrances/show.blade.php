@@ -33,10 +33,10 @@
 	</div>
 </div>
 <div class="card">
-	<ul class="row">
-		<li class="col py-3 text-white bg-info"><i class="fab fa-twitter"></i>　Twitter</li>
-		<li class="col py-3 text-white bg-primary"><i class="fab fa-facebook-f"></i>　Facebook</li>
-		<li class="col py-3 text-white bg-danger"><i class="fas fa-heart"></i>　Like</li>
+	<ul class="row react-buttons">
+		<li class="col text-white bg-info"><a href="http://twitter.com/share?url={{ Request::url() }}" target="_blank" class="p-3"><i class="fab fa-twitter"></i>　Twitter</a></li>
+		<li class="col text-white bg-primary"><a href="https://www.facebook.com/sharer/sharer.php?u={{ Request::url() }}" target="_blank" class="p-3"><i class="fab fa-facebook-f"></i>　Facebook</a></li>
+		<li class="col text-white bg-danger"><a href="#" class="p-3"><i class="fas fa-heart"></i>　Like</a></li>
 	</ul>
 </div>
 @endsection
