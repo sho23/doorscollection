@@ -356,6 +356,16 @@ ul.row {
 	background: #e8ce69;
 }
 
+.react-buttons li {
+	padding: 0;
+}
+
+.react-buttons a {
+	display: block;
+	color: #FFF;
+	text-decoration: none;
+}
+
 /*pcのためのCSS*/
 @media (min-width: 480px) {
 	.fixed-bottom {
