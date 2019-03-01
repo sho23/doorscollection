@@ -33,7 +33,8 @@ class EntrancesController extends Controller
             $query->whereNotIn('id', $ids);
         }
         $entrances = $query->paginate(18);
-        return view('entrances.mypage', compact('user', 'entrances', 'entranceFirstLine'));
+        $isUaSmt = $this->uaSmt();
+        return view('entrances.mypage', compact('user', 'entrances', 'entranceFirstLine', 'isUaSmt'));
     }
 
     public function show($id)
