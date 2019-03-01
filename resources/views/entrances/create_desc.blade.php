@@ -37,10 +37,9 @@
                         <input type="hidden" name="lat" value="">
                         <input type="hidden" name="lng" value="">
                         <input type="hidden" name="open_hours" value="">
-                        <div id="adr_address"></div>
                         <div class="form-group" id="name-input">
                             <label for="name">名前</label>
-                            <input id="searchMapInput" class="mapControls form-control" name="mapControls" type="text" placeholder="例) タリーズ　たまプラーザ駅前店">
+                            <input id="searchMapInput" class="mapControls form-control" name="name" type="text" placeholder="例) タリーズ　たまプラーザ駅前店">
                         </div>
                         <div class="form-group">
                             <label for="category">店のジャンル</label>
@@ -75,12 +74,7 @@
         var autocomplete = new google.maps.places.Autocomplete(input);
         autocomplete.addListener('place_changed', function() {
             var place = autocomplete.getPlace();
-            console.log(place.adr_address);
-            $('#adr_address').html(place.adr_address);
-            var addr = "";
-            addr = $('.region').text() + $('.street-address').text();
-            console.log(addr);
-            $('#address').val(addr);
+            $('#address').val(place.formatted_address);
             $('.mapControls').val(this.getPlace().name);
             $('input[name="lat"]').val(place.geometry.location.lat());
             $('input[name="lng"]').val(place.geometry.location.lng());

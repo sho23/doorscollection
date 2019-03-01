@@ -130,13 +130,13 @@ class EntrancesController extends Controller
         $openHours = $request->open_hours;
         if (!empty($openHours)) {
             $openHourList = explode(',', $openHours);
-            $entrance->open_hour_1 = $request->openHourList[0];
-            $entrance->open_hour_2 = $request->openHourList[1];
-            $entrance->open_hour_3 = $request->openHourList[2];
-            $entrance->open_hour_4 = $request->openHourList[3];
-            $entrance->open_hour_5 = $request->openHourList[4];
-            $entrance->open_hour_6 = $request->openHourList[5];
-            $entrance->open_hour_7 = $request->openHourList[6];
+            $entrance->open_hour_1 = $openHourList[0];
+            $entrance->open_hour_2 = $openHourList[1];
+            $entrance->open_hour_3 = $openHourList[2];
+            $entrance->open_hour_4 = $openHourList[3];
+            $entrance->open_hour_5 = $openHourList[4];
+            $entrance->open_hour_6 = $openHourList[5];
+            $entrance->open_hour_7 = $openHourList[6];
         }
         $entrance->save();
         return redirect()->route('entrances.mypage');
