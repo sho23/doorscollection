@@ -309,6 +309,10 @@ ul.row {
 	display: none;
 }
 
+#adr_address {
+	display: none;
+}
+
 .category-list input[type=checkbox] {
 	display: none;
 }

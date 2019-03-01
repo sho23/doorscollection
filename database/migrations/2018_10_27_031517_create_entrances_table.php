@@ -25,6 +25,13 @@ class CreateEntrancesTable extends Migration
             $table->double('lat', 15, 8);
             $table->double('lng', 15, 8);
             $table->string('img_url');
+            $table->string('open_hour_1')->nullable();
+            $table->string('open_hour_2')->nullable();
+            $table->string('open_hour_3')->nullable();
+            $table->string('open_hour_4')->nullable();
+            $table->string('open_hour_5')->nullable();
+            $table->string('open_hour_6')->nullable();
+            $table->string('open_hour_7')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
             $table->foreign('category_id')

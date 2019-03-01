@@ -45,6 +45,14 @@ class EntrancesController extends Controller
         return view('entrances.show', compact('entrance', 'prevPage', 'user'));
     }
 
+    public function edit($id)
+    {
+        $user = Auth::user();
+        $entrance = DB::table('entrances')->where('id', $id)->first();
+        $categoryList = DB::table('categories')->orderBy('id', 'asc')->get();
+        return view('entrances.edit', compact('entrance', 'user', 'categoryList'));
+    }
+
     public function createDesc(Request $request)
     {
         $filename = $request->filename;
@@ -101,9 +109,14 @@ class EntrancesController extends Controller
             'category' => 'required',
             'address' =>  'required',
             'detail' =>  'required',
-            'lat' =>  'required',
-            'lng' =>  'required',
         ]);
+        $lat = $request->lat;
+        $lng = $request->lng;
+        if (empty($lat)) {
+            $json = $this->callAPI($request->address);
+            $lat = $json->lat;
+            $lng = $json->lng;
+        }
         $entrance = new Entrance;
         $user = \Auth::user();
         $entrance->user_id = $user->id;
@@ -112,8 +125,19 @@ class EntrancesController extends Controller
         $entrance->address = $request->address;
         $entrance->detail = $request->detail;
         $entrance->img_url = $request->img_url;
-        $entrance->lat = $request->lat;
-        $entrance->lng = $request->lng;
+        $entrance->lat = $lat;
+        $entrance->lng = $lng;
+        $openHours = $request->open_hours;
+        if (!empty($openHours)) {
+            $openHourList = explode(',', $openHours);
+            $entrance->open_hour_1 = $request->openHourList[0];
+            $entrance->open_hour_2 = $request->openHourList[1];
+            $entrance->open_hour_3 = $request->openHourList[2];
+            $entrance->open_hour_4 = $request->openHourList[3];
+            $entrance->open_hour_5 = $request->openHourList[4];
+            $entrance->open_hour_6 = $request->openHourList[5];
+            $entrance->open_hour_7 = $request->openHourList[6];
+        }
         $entrance->save();
         return redirect()->route('entrances.mypage');
     }
@@ -165,5 +189,11 @@ class EntrancesController extends Controller
                 return true;
             }
         } return false;
+    }
+
+    public function callAPI(string $url)
+    {
+        $result = simplexml_load_file('https://www.geocoding.jp/api/?v=1.1&q=' . $url);
+        return $result->coordinate;
     }
 }
