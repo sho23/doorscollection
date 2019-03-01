@@ -20,16 +20,20 @@
     <div class="row my-2">
         <div class="col-4 text-center"><img src="{{ asset('image/ic_gloria.png') }}" class="rounded-circle" alt="" hegith="80px" width="80px"></div>
         <div class="col-8 balloon-note">
-            <p class="p-2 bg-white"><small>Kaiのよく行くお店の入り口写真を投稿してくだサイ。アメイジングな写真を期待しています!!</small></p>
+            <p class="p-2 bg-white"><small>{{ $user->name }}のよく行くお店の入り口写真を投稿してくだサイ。アメイジングな写真を期待しています!!</small></p>
         </div>
     </div>
 </div>
 <div class="card gallery">
     <ul class="row">
         <li class='col-4'><a href='#' class='upload_button'><img src='https://placehold.jp/50/757575/ffffff/100x100.png?text=%2B' alt='' class='img-fluid'></a></li>
-        <li class="col-4"><a href="{{ action('EntrancesController@show', $entranceFirstLine[0]->id) }}"><img src="{{ asset('/storage/img/150/150x150_' . $entranceFirstLine[0]->img_url) }}" alt="" class="img-fluid"></a></li>
-        <li class="col-4"><a href="{{ action('EntrancesController@show', $entranceFirstLine[1]->id) }}"><img src="{{ asset('/storage/img/150/150x150_' . $entranceFirstLine[1]->img_url) }}" alt="" class="img-fluid"></a></li>
+        @if (!$entranceFirstLine->isEmpty())
+            @foreach ($entranceFirstLine as $entranceData)
+                <li class="col-4"><a href="{{ action('EntrancesController@show', $entranceData->id) }}"><img src="{{ asset('/storage/img/150/150x150_' . $entranceData->img_url) }}" alt="" class="img-fluid"></a></li>
+            @endforeach
+        @endif
     </ul>
+    @if (!$entrances->isEmpty())
     <div class="infinite-scroll">
         <ul class="row">
             @foreach ($entrances as $entrance)
@@ -38,6 +42,7 @@
         </ul>
         {{ $entrances->links() }}
     </div>
+    @endif
 </div>
 <div class="btn-group d-flex fixed-bottom bg-white">
     <p class="mx-auto my-2 copywriter">© 2019 JOKERS LLC.</p>

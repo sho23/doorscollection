@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Image;
+use Storage;
 use App\Entrance;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Auth;
@@ -27,9 +28,12 @@ class EntrancesController extends Controller
         $query = Entrance::query();
         $query->where('user_id', $user->id)->orderBy('id', 'desc');
         $entranceFirstLine = $query->take(2)->get();
-        $entrances = $query->whereNotIn('id', [$entranceFirstLine[0]->id, $entranceFirstLine[1]->id])->paginate(18);
-
-        return view('entrances.mypage', compact('entrances', 'entranceFirstLine'));
+        if ($query->exists()) {
+            $ids = $query->take(2)->pluck('id');
+            $query->whereNotIn('id', $ids);
+        }
+        $entrances = $query->paginate(18);
+        return view('entrances.mypage', compact('user', 'entrances', 'entranceFirstLine'));
     }
 
     public function show($id)
@@ -64,7 +68,7 @@ class EntrancesController extends Controller
 
         if ($request->file('file')->isValid([])) {
             $filename = $request->file->store('', ['disk' => 'public']);
-            $img = Image::make('storage/img/' . $filename)->orientate();
+            $img = Image::make(Storage::disk('public')->url($filename))->orientate();
             if ($img->height() > $img->width()) {
                 $height = 500;
                 $width = null;
@@ -100,8 +104,8 @@ class EntrancesController extends Controller
             'lng' =>  'required',
         ]);
         $entrance = new Entrance;
-        // $user = \Auth::user();
-        $entrance->user_id = 1; #todo
+        $user = \Auth::user();
+        $entrance->user_id = $user->id;
         $entrance->name = $request->name;
         $entrance->category_id = $request->category;
         $entrance->address = $request->address;
