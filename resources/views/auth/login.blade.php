@@ -15,7 +15,7 @@
     </header>
 </div>
 <div class="row justify-content-center p-4">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="card auth-form">
             <div class="card-header">ログイン</div>
 

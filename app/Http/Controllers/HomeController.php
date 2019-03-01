@@ -63,7 +63,7 @@ class HomeController extends Controller
                 $query->whereIn('id', $distanceList);
             }
         }
-        $entrances = $query->paginate(20);
+        $entrances = $query->orderBy('id', 'desc')->paginate(20);
 
        return view('home.index', compact('categoryList', 'entrances', 'keyword', 'categoryIds', 'range'));
     }
