@@ -313,13 +313,13 @@ ul.row {
 	display: none;
 }
 .category-list label {
-	background: #2610bd;
+	background: #000;
 	border-radius: 6px;
 	margin-bottom: 0;
 }
 
 .category-list input:checked + label img {
-	opacity: 0.8;
+	opacity: 0.7;
 }
 
 .fixed-top {
