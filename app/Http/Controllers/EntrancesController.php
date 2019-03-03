@@ -49,6 +49,9 @@ class EntrancesController extends Controller
 
     public function edit($id)
     {
+        if (!$this->uaSmt()) {
+            return redirect('home');
+        }
         $user = Auth::user();
         $entrance = DB::table('entrances')->where('id', $id)->first();
         $categoryList = DB::table('categories')->orderBy('id', 'asc')->get();
@@ -160,6 +163,11 @@ class EntrancesController extends Controller
         $entrance = Entrance::find($id);
         $entrance->name = $request->name;
         $entrance->category_id = $request->category;
+        if ($entrance->address !== $request->address) {
+            $json = $this->callAPI($request->address);
+            $entrance->lat = $json->lat;
+            $entrance->lng = $json->lng;
+        }
         $entrance->address = $request->address;
         $entrance->detail = $request->detail;
         $entrance->save();

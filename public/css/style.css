@@ -413,4 +413,8 @@ ul.row {
 	.copywriter {
 		display: block;
 	}
+
+	.entrance-actions {
+		display: none;
+	}
 }

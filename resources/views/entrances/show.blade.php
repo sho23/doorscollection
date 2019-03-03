@@ -8,7 +8,7 @@
 		<ul class="row">
 			<li class="col-2 align-middle pl-4"><a href="{{ $prevUrl }}"><i class="fas fa-arrow-left"></i></a></li>
 			@if(isset($user) && $entrance->user_id == $user->id)
-				<li class="col-2 offset-8 align-middle pr-4 dropdown">
+				<li class="col-2 offset-8 align-middle pr-4 dropdown entrance-actions">
 					<a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 						<a class="dropdown-item" href="{{ action('EntrancesController@edit', $entrance->id) }}">編集</a>
