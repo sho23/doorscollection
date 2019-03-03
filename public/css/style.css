@@ -395,6 +395,10 @@ ul.row {
 	text-decoration: none;
 }
 
+.select-range {
+	display: none;
+}
+
 /*pcのためのCSS*/
 @media (min-width: 480px) {
 	body {

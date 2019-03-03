@@ -132,15 +132,18 @@
             if(navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     function(position) {
+                        $('.select-range').show();
                         $('input[name="lat"]').val(position.coords.latitude);
                         $('input[name="lng"]').val(position.coords.longitude);
                     },
                     function(err) {
-                        $('.select-range').hide();
+                    },
+                    {
+                        enableHighAccuracy:true;
+                        timeout:6000;
+                        maximumAge:600000;
                     }
                 );
-            } else {
-                $('.select-range').hide();
             }
         });
     </script>
