@@ -139,9 +139,9 @@
                     function(err) {
                     },
                     {
-                        enableHighAccuracy:true;
-                        timeout:6000;
-                        maximumAge:600000;
+                        enableHighAccuracy:true,
+                        timeout:6000,
+                        maximumAge:600000
                     }
                 );
             }
