@@ -23,7 +23,7 @@
         <div class="nav nav-tabs m-2 category-list">
             @foreach ($categoryList as $category)
                 <input type="checkbox" name="categoryIds[]" id="ct-{{ $category->id }}" value="{{ $category->id }}" {{ is_array($categoryIds) && in_array($category->id, $categoryIds) ? 'checked="checked"' : '' }}>
-                <label for="ct-{{ $category->id }}" class="mr-2"><img src="{{ asset('/image/category/' . $category->img_url) }}" alt="" width="125"></label>
+                <label for="ct-{{ $category->id }}" class="mr-2"><img src="{{ asset('/image/category/' . $category->img_url) }}" alt=""></label>
             @endforeach
         </div>
     </div>

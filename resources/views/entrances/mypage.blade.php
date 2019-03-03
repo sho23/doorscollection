@@ -26,7 +26,9 @@
 </div>
 <div class="card gallery">
     <ul class="row">
-        <li class='col-4'><a href='#' class='upload_button'><img src='https://placehold.jp/50/757575/ffffff/100x100.png?text=%2B' alt='' class='img-fluid'></a></li>
+        @if ($isUaSmt)
+            <li class='col-4'><a href='#' class='upload_button'><img src='https://placehold.jp/100/757575/ffffff/300x300.png?text=%2B' alt='' class='img-fluid'></a></li>
+        @endif
         @if (!$entranceFirstLine->isEmpty())
             @foreach ($entranceFirstLine as $entranceData)
                 <li class="col-4"><a href="{{ action('EntrancesController@show', $entranceData->id) }}"><img src="{{ asset('/storage/img/150/150x150_' . $entranceData->img_url) }}" alt="" class="img-fluid"></a></li>

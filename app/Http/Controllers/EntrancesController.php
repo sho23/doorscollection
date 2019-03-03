@@ -33,7 +33,8 @@ class EntrancesController extends Controller
             $query->whereNotIn('id', $ids);
         }
         $entrances = $query->paginate(18);
-        return view('entrances.mypage', compact('user', 'entrances', 'entranceFirstLine'));
+        $isUaSmt = $this->uaSmt();
+        return view('entrances.mypage', compact('user', 'entrances', 'entranceFirstLine', 'isUaSmt'));
     }
 
     public function show($id)
@@ -41,7 +42,20 @@ class EntrancesController extends Controller
         $user = Auth::user();
         $entrance = DB::table('entrances')->where('id', $id)->first();
         $prevPage = url()->previous();
-        return view('entrances.show', compact('entrance', 'prevPage', 'user'));
+        $prevPath = parse_url($prevPage);
+        $prevUrl = $prevPath['path'] == '/entrances/mypage' ? url('/entrances/mypage') : url('home');
+        return view('entrances.show', compact('entrance', 'prevUrl', 'user'));
+    }
+
+    public function edit($id)
+    {
+        if (!$this->uaSmt()) {
+            return redirect('home');
+        }
+        $user = Auth::user();
+        $entrance = DB::table('entrances')->where('id', $id)->first();
+        $categoryList = DB::table('categories')->orderBy('id', 'asc')->get();
+        return view('entrances.edit', compact('entrance', 'user', 'categoryList'));
     }
 
     public function createDesc(Request $request)
@@ -100,9 +114,14 @@ class EntrancesController extends Controller
             'category' => 'required',
             'address' =>  'required',
             'detail' =>  'required',
-            'lat' =>  'required',
-            'lng' =>  'required',
         ]);
+        $lat = $request->lat;
+        $lng = $request->lng;
+        if (empty($lat)) {
+            $json = $this->callAPI($request->address);
+            $lat = $json->lat;
+            $lng = $json->lng;
+        }
         $entrance = new Entrance;
         $user = \Auth::user();
         $entrance->user_id = $user->id;
@@ -111,51 +130,102 @@ class EntrancesController extends Controller
         $entrance->address = $request->address;
         $entrance->detail = $request->detail;
         $entrance->img_url = $request->img_url;
-        $entrance->lat = $request->lat;
-        $entrance->lng = $request->lng;
+        $entrance->lat = $lat;
+        $entrance->lng = $lng;
+        $openHours = $request->open_hours;
+        if (!empty($openHours)) {
+            $openHourList = explode(',', $openHours);
+            $entrance->open_hour_1 = $openHourList[0];
+            $entrance->open_hour_2 = $openHourList[1];
+            $entrance->open_hour_3 = $openHourList[2];
+            $entrance->open_hour_4 = $openHourList[3];
+            $entrance->open_hour_5 = $openHourList[4];
+            $entrance->open_hour_6 = $openHourList[5];
+            $entrance->open_hour_7 = $openHourList[6];
+        }
         $entrance->save();
         return redirect()->route('entrances.mypage');
     }
 
-
-    private function get_10_from_60_exif($ref, $gps) {
-        $data = $this->convert_float($gps[0]) + ($this->convert_float($gps[1])/60) + ($this->convert_float($gps[2])/3600);
-        return ($ref=='S' || $ref=='W') ? ($data * -1) : $data;
-    }
-
-    private function convert_float($str) {
-        $val = explode("/", $str);
-        return (isset($val[1])) ? $val[0] / $val[1] : $str;
-    }
-
-    private function suggestPlaces($latlng) {
-        $suggestList = [];
-        $categoryList = [];
-        $key = 'AIzaSyAyd89-4iN5ZVlDG1AlWvUDmEHW37UAxgk';
-        $json = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" . $latlng . "&radius=50&language=ja&key=" . $key;
-        $addr = file_get_contents($json);
-        $arr = json_decode($addr);
-        foreach ($arr->results as $key => $data) {
-            if (isset($data->name)) {
-                $name = $data->name;
-            }
-            if (isset($data->types)) {
-                $category = $data->types[0];
-            }
-            if (isset($data->vicinity)) {
-                $address = $data->vicinity;
-            }
-            $suggestList[$key][] = $name;
-            if (!in_array($category, $categoryList)) {
-                $categoryList[] = $category;
-            }
-            $suggestList[$key][] = $address;
-            $suggestList[$key][] = $category;
+    public function update(Request $request, $id)
+    {
+        if (!$this->checkEntranceAuth($id)) {
+            return redirect()->route('entrances.mypage')->with('faild', 'データの編集に失敗しました');
         }
-        return array($suggestList, $categoryList);
+
+        $this->validate($request, [
+            'name' => 'required',
+            'category' => 'required',
+            'address' =>  'required',
+            'detail' => 'required',
+        ]);
+
+        $entrance = Entrance::find($id);
+        $entrance->name = $request->name;
+        $entrance->category_id = $request->category;
+        if ($entrance->address !== $request->address) {
+            $json = $this->callAPI($request->address);
+            $entrance->lat = $json->lat;
+            $entrance->lng = $json->lng;
+        }
+        $entrance->address = $request->address;
+        $entrance->detail = $request->detail;
+        $entrance->save();
+        return redirect()->route('entrances.show', $entrance->id)->with('succeed', '編集が完了しました');
     }
 
-    function uaSmt()
+    public function destroy($id)
+    {
+        $entrance = Entrance::findOrFail($id);
+        $entrance->delete();
+        return redirect()->route('entrances.mypage');
+    }
+
+    // private function get_10_from_60_exif($ref, $gps) {
+    //     $data = $this->convert_float($gps[0]) + ($this->convert_float($gps[1])/60) + ($this->convert_float($gps[2])/3600);
+    //     return ($ref=='S' || $ref=='W') ? ($data * -1) : $data;
+    // }
+
+    // private function convert_float($str) {
+    //     $val = explode("/", $str);
+    //     return (isset($val[1])) ? $val[0] / $val[1] : $str;
+    // }
+
+    // private function suggestPlaces($latlng) {
+    //     $suggestList = [];
+    //     $categoryList = [];
+    //     $key = 'AIzaSyAyd89-4iN5ZVlDG1AlWvUDmEHW37UAxgk';
+    //     $json = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" . $latlng . "&radius=50&language=ja&key=" . $key;
+    //     $addr = file_get_contents($json);
+    //     $arr = json_decode($addr);
+    //     foreach ($arr->results as $key => $data) {
+    //         if (isset($data->name)) {
+    //             $name = $data->name;
+    //         }
+    //         if (isset($data->types)) {
+    //             $category = $data->types[0];
+    //         }
+    //         if (isset($data->vicinity)) {
+    //             $address = $data->vicinity;
+    //         }
+    //         $suggestList[$key][] = $name;
+    //         if (!in_array($category, $categoryList)) {
+    //             $categoryList[] = $category;
+    //         }
+    //         $suggestList[$key][] = $address;
+    //         $suggestList[$key][] = $category;
+    //     }
+    //     return array($suggestList, $categoryList);
+    // }
+
+    private function checkEntranceAuth($entranceId)
+    {
+        $user = \Auth::user();
+        $post = DB::table('entrances')->where('id', $entranceId)->where('user_id', $user->id)->first();
+        return !empty($entranceId);
+    }
+
+    private function uaSmt()
     {
         $ua = $_SERVER['HTTP_USER_AGENT'];
         $uaList = array('iPhone','iPad','iPod','Android');
@@ -164,5 +234,11 @@ class EntrancesController extends Controller
                 return true;
             }
         } return false;
+    }
+
+    private function callAPI(string $url)
+    {
+        $result = simplexml_load_file('https://www.geocoding.jp/api/?v=1.1&q=' . $url);
+        return $result->coordinate;
     }
 }

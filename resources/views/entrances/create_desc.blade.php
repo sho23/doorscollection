@@ -36,13 +36,10 @@
                         @endif
                         <input type="hidden" name="lat" value="">
                         <input type="hidden" name="lng" value="">
+                        <input type="hidden" name="open_hours" value="">
                         <div class="form-group" id="name-input">
                             <label for="name">名前</label>
-                                <input id="searchMapInput" class="mapControls form-control" name="mapControls" type="text" placeholder="例) タリーズ　たまプラーザ駅前店">
-                                <input type="hidden" id="name" name="name">
-                        </div>
-                        <div class="form-group">
-                                <h5 id="preview-name"></h5>
+                            <input id="searchMapInput" class="mapControls form-control" name="name" type="text" placeholder="例) タリーズ　たまプラーザ駅前店">
                         </div>
                         <div class="form-group">
                             <label for="category">店のジャンル</label>
@@ -78,11 +75,10 @@
         autocomplete.addListener('place_changed', function() {
             var place = autocomplete.getPlace();
             $('#address').val(place.formatted_address);
-            $('#name').val(place.name);
+            $('.mapControls').val(this.getPlace().name);
             $('input[name="lat"]').val(place.geometry.location.lat());
             $('input[name="lng"]').val(place.geometry.location.lng());
-            $('#preview-name').text("登録名：" + place.name);
-            $("#name-input").css('display', 'none');
+            $('input[name="open_hours"]').val(place.opening_hours.weekday_text);
         });
     }
 </script>
