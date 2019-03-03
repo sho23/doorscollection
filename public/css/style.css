@@ -18,6 +18,14 @@ html {
 	background-color: #ff6190 !important;
 }
 
+.bg-warning {
+	background-color: #ecd259 !important;
+}
+
+.border-warning {
+	border-color: #ecd259 !important;
+}
+
 /***********  全体の設定  ************/
 body {
 	background-color: #FFF;
@@ -75,12 +83,12 @@ ul.row {
 }
 
 /***********  リストヘッダー  ************/
-.entrance-list header a span {
+.entrance-list header a span, .single-page header a span {
 	font-size: 16px;
 	color: #6a6a6a;
 }
 
-.entrance-list header {
+.entrance-list header, .single-page header {
 	padding-top: 11px;
 	padding-bottom: 7px;
 	line-height: 36px;
@@ -96,6 +104,15 @@ ul.row {
 
 .header-logo {
 	padding: 0;
+}
+
+.single-page .container {
+	height: calc(100vh - 3rem);
+	background: #FFF;
+}
+
+.single-page .card-body {
+	padding: 1.0rem;
 }
 
 /***********  カテゴリ選択横スクロール  ************/
@@ -125,7 +142,7 @@ ul.row {
 
 /***********  ヘッダー  ************/
 /* 黄色(共通ヘッダー) */
-.entrance-list header {
+.entrance-list header, .single-page header {
 	background-color: #ecd259;
 }
 
@@ -380,10 +397,13 @@ ul.row {
 
 /*pcのためのCSS*/
 @media (min-width: 480px) {
+	body {
+		background: #fdfdfd;
+	}
 	.fixed-bottom {
 		left: 260px;
 	}
-	.entrance-list, .detail, .top {
+	.entrance-list, .detail, .top, .single-page {
 		max-width: 500px;
 		margin-left: auto;
 	    margin-right: auto;
