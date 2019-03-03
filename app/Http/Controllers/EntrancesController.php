@@ -42,7 +42,9 @@ class EntrancesController extends Controller
         $user = Auth::user();
         $entrance = DB::table('entrances')->where('id', $id)->first();
         $prevPage = url()->previous();
-        return view('entrances.show', compact('entrance', 'prevPage', 'user'));
+        $prevPath = parse_url($prevPage);
+        $prevUrl = $prevPath['path'] == '/entrances/mypage' ? url('/entrances/mypage') : url('home');
+        return view('entrances.show', compact('entrance', 'prevUrl', 'user'));
     }
 
     public function edit($id)
@@ -142,45 +144,80 @@ class EntrancesController extends Controller
         return redirect()->route('entrances.mypage');
     }
 
-
-    private function get_10_from_60_exif($ref, $gps) {
-        $data = $this->convert_float($gps[0]) + ($this->convert_float($gps[1])/60) + ($this->convert_float($gps[2])/3600);
-        return ($ref=='S' || $ref=='W') ? ($data * -1) : $data;
-    }
-
-    private function convert_float($str) {
-        $val = explode("/", $str);
-        return (isset($val[1])) ? $val[0] / $val[1] : $str;
-    }
-
-    private function suggestPlaces($latlng) {
-        $suggestList = [];
-        $categoryList = [];
-        $key = 'AIzaSyAyd89-4iN5ZVlDG1AlWvUDmEHW37UAxgk';
-        $json = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" . $latlng . "&radius=50&language=ja&key=" . $key;
-        $addr = file_get_contents($json);
-        $arr = json_decode($addr);
-        foreach ($arr->results as $key => $data) {
-            if (isset($data->name)) {
-                $name = $data->name;
-            }
-            if (isset($data->types)) {
-                $category = $data->types[0];
-            }
-            if (isset($data->vicinity)) {
-                $address = $data->vicinity;
-            }
-            $suggestList[$key][] = $name;
-            if (!in_array($category, $categoryList)) {
-                $categoryList[] = $category;
-            }
-            $suggestList[$key][] = $address;
-            $suggestList[$key][] = $category;
+    public function update(Request $request, $id)
+    {
+        if (!$this->checkEntranceAuth($id)) {
+            return redirect()->route('entrances.mypage')->with('faild', 'データの編集に失敗しました');
         }
-        return array($suggestList, $categoryList);
+
+        $this->validate($request, [
+            'name' => 'required',
+            'category' => 'required',
+            'address' =>  'required',
+            'detail' => 'required',
+        ]);
+
+        $entrance = Entrance::find($id);
+        $entrance->name = $request->name;
+        $entrance->category_id = $request->category;
+        $entrance->address = $request->address;
+        $entrance->detail = $request->detail;
+        $entrance->save();
+        return redirect()->route('entrances.show', $entrance->id)->with('succeed', '編集が完了しました');
     }
 
-    function uaSmt()
+    public function destroy($id)
+    {
+        $entrance = Entrance::findOrFail($id);
+        $entrance->delete();
+        return redirect()->route('entrances.mypage');
+    }
+
+    // private function get_10_from_60_exif($ref, $gps) {
+    //     $data = $this->convert_float($gps[0]) + ($this->convert_float($gps[1])/60) + ($this->convert_float($gps[2])/3600);
+    //     return ($ref=='S' || $ref=='W') ? ($data * -1) : $data;
+    // }
+
+    // private function convert_float($str) {
+    //     $val = explode("/", $str);
+    //     return (isset($val[1])) ? $val[0] / $val[1] : $str;
+    // }
+
+    // private function suggestPlaces($latlng) {
+    //     $suggestList = [];
+    //     $categoryList = [];
+    //     $key = 'AIzaSyAyd89-4iN5ZVlDG1AlWvUDmEHW37UAxgk';
+    //     $json = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" . $latlng . "&radius=50&language=ja&key=" . $key;
+    //     $addr = file_get_contents($json);
+    //     $arr = json_decode($addr);
+    //     foreach ($arr->results as $key => $data) {
+    //         if (isset($data->name)) {
+    //             $name = $data->name;
+    //         }
+    //         if (isset($data->types)) {
+    //             $category = $data->types[0];
+    //         }
+    //         if (isset($data->vicinity)) {
+    //             $address = $data->vicinity;
+    //         }
+    //         $suggestList[$key][] = $name;
+    //         if (!in_array($category, $categoryList)) {
+    //             $categoryList[] = $category;
+    //         }
+    //         $suggestList[$key][] = $address;
+    //         $suggestList[$key][] = $category;
+    //     }
+    //     return array($suggestList, $categoryList);
+    // }
+
+    private function checkEntranceAuth($entranceId)
+    {
+        $user = \Auth::user();
+        $post = DB::table('entrances')->where('id', $entranceId)->where('user_id', $user->id)->first();
+        return !empty($entranceId);
+    }
+
+    private function uaSmt()
     {
         $ua = $_SERVER['HTTP_USER_AGENT'];
         $uaList = array('iPhone','iPad','iPod','Android');
@@ -191,7 +228,7 @@ class EntrancesController extends Controller
         } return false;
     }
 
-    public function callAPI(string $url)
+    private function callAPI(string $url)
     {
         $result = simplexml_load_file('https://www.geocoding.jp/api/?v=1.1&q=' . $url);
         return $result->coordinate;

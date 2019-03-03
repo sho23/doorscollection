@@ -6,9 +6,15 @@
 <div class="fixed-top">
 	<header class="px-2 py-3">
 		<ul class="row">
-			<li class="col-2 align-middle pl-4"><a href="{{ $prevPage }}"><i class="fas fa-arrow-left"></i></a></li>
+			<li class="col-2 align-middle pl-4"><a href="{{ $prevUrl }}"><i class="fas fa-arrow-left"></i></a></li>
 			@if(isset($user) && $entrance->user_id == $user->id)
-				<li class="col-2 offset-8 align-middle pr-4"><a href=""><i class="fas fa-ellipsis-v"></i></a></li>
+				<li class="col-2 offset-8 align-middle pr-4 dropdown">
+					<a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<a class="dropdown-item" href="{{ action('EntrancesController@edit', $entrance->id) }}">編集</a>
+						<a class="dropdown-item text-danger" href="#">削除</a>
+					</div>
+				</li>
 			@endif
 		</ul>
 	</header>

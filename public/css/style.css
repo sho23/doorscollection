@@ -234,6 +234,18 @@ ul.row {
 	color: #6a6a6a;
 }
 
+/***********  編集画面  ************/
+.edit .content {
+	margin-top: 55px;
+	background: #FFF;
+	border-bottom: 0;
+}
+
+.edit header a {
+	font-size: 16px;
+	color: #6a6a6a;
+}
+
 /***********  グロリア吹き出し  ************/
 .avatar-area {
 	border-top: 0;
