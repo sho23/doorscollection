@@ -22,6 +22,7 @@ Route::post('entrances/storeDesc', 'EntrancesController@storeDesc')->name('entra
 Route::resource('entrances', 'EntrancesController');
 Route::get('/home', 'HomeController@index')->name('home.index');
 Route::get('/policy', 'HomeController@policy')->name('home.policy');
+Route::get('/qa', 'HomeController@qa')->name('home.qa');
 
 Route::get('/login/twitter', 'Auth\SocialController@getTwitterAuth');
 Route::get('/login/twitter/callback', 'Auth\SocialController@getTwitterAuthCallback');
