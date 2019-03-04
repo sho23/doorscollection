@@ -25,7 +25,7 @@
     <div class="row my-2">
         <div class="col-4 text-center"><img src="{{ asset('image/ic_gloria.png') }}" class="rounded-circle" alt="" hegith="80px" width="80px"></div>
         <div class="col-8 balloon-note">
-            <p class="p-2 bg-white"><small>{{ $user->name }}のよく行くお店の入り口写真を投稿してくだサイ。アメイジングな写真を期待しています!!</small></p>
+            <p class="p-2 bg-white"><small>{{ $user->name }}が迷った目的地の入り口写真もぜひ投稿してみてくだサイ！その写真で誰かが救えルかも♪</small></p>
         </div>
     </div>
 </div>
@@ -53,7 +53,7 @@
 </div>
 <div class="btn-group d-flex fixed-bottom bg-white">
     <p class="mx-auto my-2 copywriter">© 2019 JOKERS LLC.</p>
-    <a href="{{ action('HomeController@index') }}" class="btn btn-outline-light w-100 text-warning py-3"><i class="fas fa-search mr-3"></i>SEARCH</a>
+    <a href="{{ action('HomeController@index') }}" class="btn btn-outline-light w-100 text-warning py-3 active"><i class="fas fa-search mr-3"></i>SEARCH</a>
     <a href="#" class="upload_button btn btn-outline-light w-100 text-danger py-3"><i class="fas fa-camera mr-3"></i>POST</a>
 </div>
 {!! Form::open(['route' => ['entrances.store'], 'method' => 'post', 'files' => true, 'class' => 'entrance-form']) !!}
