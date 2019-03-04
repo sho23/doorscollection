@@ -366,10 +366,10 @@ ul.row {
 }
 
 #loading {
-	position:absolute;
-	left:50%;
-	top:20%;
-	margin-left:-30px;
+	position: absolute;
+	left: 50%;
+	top: 20%;
+	margin-left: -15px;
 }
 
 .copywriter {
@@ -398,6 +398,11 @@ ul.row {
 .select-range {
 	display: none;
 }
+
+.entrance-list .fixed-bottom .active {
+	border-top: 5px solid #efc055 !important;
+}
+
 
 /*pcのためのCSS*/
 @media (min-width: 480px) {
