@@ -17,7 +17,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'policy']);
+        $this->middleware('auth')->except(['index', 'policy', 'qa']);
     }
 
     /**
@@ -70,6 +70,11 @@ class HomeController extends Controller
     public function policy()
     {
         return view('home.policy');
+    }
+
+    public function qa()
+    {
+        return view('home.qa');
     }
 
     private function distance($startLat, $startLng, $endLat, $endLng)
