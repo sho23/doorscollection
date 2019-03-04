@@ -56,11 +56,11 @@
                         </div>
                     </ul>
                 </li>
-                <li class="list-group-item py-1">
+                <li class="list-group-item py-1 py-2">
                     <ul class="list-inline">
                         <div class="row">
-                            <li class="offset-10 list-inline-item">
-                                <button class="btn btn-success">検索</button>
+                            <li class="col-10 offset-1 list-inline-item">
+                                <button class="btn btn-success btn btn-block">入り口写真を検索</button>
                             </li>
                         </div>
                     </ul>
