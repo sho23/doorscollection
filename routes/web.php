@@ -24,6 +24,8 @@ Route::get('/home', 'HomeController@index')->name('home.index');
 Route::get('/policy', 'HomeController@policy')->name('home.policy');
 Route::get('/qa', 'HomeController@qa')->name('home.qa');
 Route::resource('users', 'UserController');
+Route::get('/leave', 'UserController@leave')->name('users.leave');
+Route::post('/leavingStore', 'UserController@leavingStore')->name('users.leavingStore');
 Route::put('updateStatus/{id}', 'UserController@updateStatus')->name('users.updateStatus');
 Route::put('updateVerify/{id}', 'UserController@updateVerify')->name('users.updateVerify');
 
