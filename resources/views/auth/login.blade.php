@@ -16,7 +16,11 @@
 </div>
 <div class="container pt-5">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="text-center my-2 col-12">
+            <p class="text-left">ユーザー登録すると、いいねや画像投稿ができマス。ぜひ一緒にコレクションを充実させていきまショウ！！</p>
+            <div class="col-10 offset-1"><a class="btn btn-success btn-block" href="{{ route('register') }}">新規ユーザー登録</a></div>
+        </div>
+        <div class="col-md-12 mb-4">
             <div class="card auth-form">
                 <div class="card-header">ログイン</div>
 
@@ -73,10 +77,6 @@
                                 <a class="btn btn-link mt-2" href="{{ route('password.request') }}">
                                     パスワードを忘れた場合
                                 </a>
-                                <a class="btn btn-link" href="{{ route('register') }}">
-                                    新規登録
-                                </a>
-
                             </div>
                         </div>
                     </form>
