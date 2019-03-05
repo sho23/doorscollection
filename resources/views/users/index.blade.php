@@ -28,42 +28,42 @@
                                    echo '未認証' . '<a href="#" data-toggle="modal" data-target="#vertifyModal" data-id="' . $user->id . '" data-name="' . $user->name . '"> [変更]</a>';
                                 } ?>
                         </td>
-                        <td>{{ $statusList[$user->status] }} <a href="#" data-toggle="modal" data-target="#statusModal" data-id="{{ $user->id }}" data-name="{{ $user->name }}">[変更]</a></td>
+                        <td>{{ $statusList[$user->status] }} <a href="#" data-toggle="modal" data-target="#statusModal{{ $user->id }}" data-id="{{ $user->id }}" data-name="{{ $user->name }}">[変更]</a></td>
                     </tr>
+                    <div class="modal fade" id="statusModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h6 class="modal-title">ユーザーステータスの変更</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                {!! Form::open(['route' => ['users.updateStatus',$user->id], 'method'=>'put', 'class' => 'status-form']) !!}
+                                    <div class="modal-body">
+                                        <p></p>
+                                        <div class="form-group">
+                                            <label for="status">ユーザーステータス</label>
+                                            <select id="status" name="status" class="form-control">
+                                                @foreach ($statusList as $key => $status)
+                                                    <option value="{{ $key }}" {{ $user->status == $key ? 'selected' : null }}>{{ $statusList[$key] }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                                            {!! Form::submit('変更する', ['class' => 'btn btn-danger']) !!}
+                                    </div><!-- /.modal-footer -->
+                                {!! Form::close() !!}
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
                 @endforeach
             </tbody>
         </table>
     </div>
 </div>
-<div class="modal fade" id="statusModal" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title">ユーザーステータスの変更</h6>
-                <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            {!! Form::open(['route' => ['users.updateStatus',$user->id], 'method'=>'put', 'class' => 'status-form']) !!}
-                <div class="modal-body">
-                    <p></p>
-                    <div class="form-group">
-                        <label for="status">ユーザーステータス</label>
-                        <select id="status" name="status" class="form-control">
-                            @foreach ($statusList as $key => $status)
-                                <option value="{{ $key }}" {{ $user->status == $key ? 'selected' : null }}>{{ $statusList[$key] }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                        {!! Form::submit('変更する', ['class' => 'btn btn-danger']) !!}
-                </div><!-- /.modal-footer -->
-            {!! Form::close() !!}
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 <div class="modal fade" id="vertifyModal" tabindex="-1" role="dialog" aria-labelledby="vertifyModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
