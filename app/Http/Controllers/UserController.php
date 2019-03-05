@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use App\LeavingReason;
 
 class UserController extends Controller
 {
@@ -53,6 +54,32 @@ class UserController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function leave()
+    {
+        $user = \Auth::user();
+        return view('users.leave', ['user' => $user]);
+    }
+
+    public function leavingStore(Request $request)
+    {
+        $user = \Auth::user();
+        $this->validate($request, [
+            'reason' => 'required',
+        ]);
+        $user = \Auth::user();
+        $leavingReason = new LeavingReason;
+        $leavingReason->reason = $request->reason;
+        $leavingReason->user_id = $user->id;
+        $leavingReason->other = $request->other;
+        $leavingReason->save();
+
+        $user = User::findOrFail($user->id);
+        $user->status = config('const.LEAVING');
+        $user->save();
+        Auth::logout();
+        return redirect()->route('home.index')->with('faild', '権限がありません');
     }
 
     /**
