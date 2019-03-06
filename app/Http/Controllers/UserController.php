@@ -20,7 +20,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $user = \Auth::user();
+        if (strval($user->id) !== env('AUTH_USER', null)) {
+            return redirect()->route('home.index')->with('faild', '権限がありません');
+        }
+
+        $query = User::query();
+        $users = $query->select('users.*')
+                ->orderBy('id', 'desc')->paginate(50);
         return view('users.index', ['users' => $users]);
     }
 

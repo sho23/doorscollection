@@ -19,7 +19,7 @@
 		</ul>
 	</header>
 </div>
-<div class="card content">
+<div class="card content {{ $entrance->status == config('const.ENTRANCE_CLOSED') ? 'closed' : '' }}">
 	<a href="#"><img src="{{ asset('/storage/img/500/500x500_' . $entrance->img_url) }}" alt="" class="img-fluid"></a>
 	<table class="m-4">
 		<tr class="align-top"><th class="text-center"><i class="fas fa-university mr-4"></i></th><td class="pb-3">{{ $entrance->name }}</td></tr>
@@ -28,6 +28,7 @@
 			<td class="pb-3">{{ $entrance->detail }}<br>
 			<small>{{ $entrance->created_at }} に投稿</small></td>
 		</tr>
+		<tr class="text-right"><th></th><td><small><a class="text-secondary" href="{{ action('EntrancesController@claim', $entrance->id) }}">間違いを報告</a></small></td></tr>
 	</table>
 </div>
 <div class="card bg-gray avatar-area py-2">

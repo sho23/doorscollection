@@ -404,11 +404,11 @@ ul.row {
 }
 
 
-.entrance-list .closed {
+.entrance-list .closed, .detail-page .closed > a {
 	background: #000;
 	position: relative;
 }
-.entrance-list .closed:before {
+.entrance-list .closed:before , .detail-page .closed > a:before {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -422,8 +422,16 @@ ul.row {
 	content: "閉店";
 }
 
-.entrance-list .closed img {
-	opacity: 0.2;
+.detail-page .closed > a:before {
+	font-size: 50px;
+    width: 102px;
+    height: 70px;
+    background: #f7f4f4;
+    z-index: 1;
+}
+
+.entrance-list .closed img, .detail-page .closed img {
+	opacity: 0.5;
 }
 
 /*pcのためのCSS*/

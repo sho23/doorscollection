@@ -63,6 +63,9 @@
             </tbody>
         </table>
     </div>
+    <div class="mt-2">
+        {{ $users->links() }}
+    </div>
 </div>
 <div class="modal fade" id="vertifyModal" tabindex="-1" role="dialog" aria-labelledby="vertifyModalLabel">
     <div class="modal-dialog" role="document">

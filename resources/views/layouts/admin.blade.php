@@ -46,6 +46,12 @@
                   お知らせ管理
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ action('ClaimsController@index') }}">
+                  <span data-feather="file"></span>
+                  間違い報告管理
+                </a>
+              </li>
             </ul>
           </div>
         </nav>

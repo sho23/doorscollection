@@ -7,6 +7,7 @@ use DB;
 use Image;
 use Storage;
 use App\Entrance;
+use App\Claim;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Auth;
 
@@ -58,6 +59,11 @@ class EntrancesController extends Controller
         $prevPath = parse_url($prevPage);
         $prevUrl = $prevPath['path'] == '/entrances/mypage' ? url('/entrances/mypage') : url('home');
         return view('entrances.show', compact('entrance', 'prevUrl', 'user'));
+    }
+
+    public function claimcomplete()
+    {
+        return view('entrances.claimcomplete');
     }
 
     public function edit($id)
@@ -201,6 +207,28 @@ class EntrancesController extends Controller
         $entrance->status = $request->status;
         $entrance->save();
         return redirect()->route('entrances.index')->with('succeed', '変更しました');
+    }
+
+    public function claim($id)
+    {
+        $entrance = DB::table('entrances')->where('id', $id)->first();
+        return view('entrances.claim', compact('entrance'));
+    }
+
+    public function storeClaim(Request $request, $id)
+    {
+        $user = \Auth::user();
+        $this->validate($request, [
+            'claim' => 'required',
+        ]);
+        $user = \Auth::user();
+        $claim = new Claim;
+        $claim->claim = $request->claim;
+        $claim->user_id = $user->id;
+        $claim->entrance_id = $id;
+        $claim->other = $request->other;
+        $claim->save();
+        return redirect()->route('entrances.claimcomplete');
     }
 
     public function destroy($id)
