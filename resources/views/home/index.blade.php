@@ -74,7 +74,7 @@
     <div class="infinite-scroll">
         <ul class="row">
             @foreach ($entrances as $entrance)
-                <li class="col-6"><a href="{{ action('EntrancesController@show', $entrance->id) }}"><img src="{{ asset('/storage/img/500/500x500_' . $entrance->img_url) }}" alt="" class="img-fluid"><p><span class="text-white">{{ $entrance->name }}</span></p></a></li>
+                <li class="col-6 {{ $entrance->status == config('const.ENTRANCE_CLOSED') ? 'closed' : '' }}"><a href="{{ action('EntrancesController@show', $entrance->id) }}"><img src="{{ asset('/storage/img/500/500x500_' . $entrance->img_url) }}" alt="" class="img-fluid"><p><span class="text-white">{{ $entrance->name }}</span></p></a></li>
             @endforeach
         </ul>
         {{ $entrances->appends(['keyword'=>$keyword, 'categoryIds'=>$categoryIds, 'range' => $range])->render() }}

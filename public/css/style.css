@@ -404,6 +404,28 @@ ul.row {
 }
 
 
+.entrance-list .closed {
+	background: #000;
+	position: relative;
+}
+.entrance-list .closed:before {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	width: 61px;
+	height: 35px;
+	color: #ff0000;
+	font-size: 30px;
+	content: "閉店";
+}
+
+.entrance-list .closed img {
+	opacity: 0.2;
+}
+
 /*pcのためのCSS*/
 @media (min-width: 480px) {
 	body {

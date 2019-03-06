@@ -41,7 +41,7 @@
                                 </div>
                                 {!! Form::open(['route' => ['users.updateStatus',$user->id], 'method'=>'put', 'class' => 'status-form']) !!}
                                     <div class="modal-body">
-                                        <p></p>
+                                        <p>{{ $user->name }} : このユーザーステータスを変更します。</p>
                                         <div class="form-group">
                                             <label for="status">ユーザーステータス</label>
                                             <select id="status" name="status" class="form-control">
@@ -92,11 +92,6 @@
         var button = $(event.relatedTarget)
         $('.verify-form').attr('action', "updateVerify/" + button.data('id'));
         $('.verify-form').find('.modal-body p').text(button.data('name') + ' このユーザーを認証します。')
-    })
-    $('#statusModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget)
-        $('.status-form').attr('action', "updateStatus/" + button.data('id'));
-        $('.status-form').find('.modal-body p').text(button.data('name') + ' このユーザーステータスを変更します。')
     })
 </script>
 @endpush

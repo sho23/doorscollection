@@ -27,6 +27,7 @@ Route::resource('users', 'UserController');
 Route::get('/leave', 'UserController@leave')->name('users.leave');
 Route::post('/leavingStore', 'UserController@leavingStore')->name('users.leavingStore');
 Route::put('updateStatus/{id}', 'UserController@updateStatus')->name('users.updateStatus');
+Route::put('entrances/updateStatus/{id}', 'EntrancesController@updateStatus')->name('entrances.updateStatus');
 Route::put('updateVerify/{id}', 'UserController@updateVerify')->name('users.updateVerify');
 
 Route::get('/login/twitter', 'Auth\SocialController@getTwitterAuth');

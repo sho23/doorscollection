@@ -1,78 +1,85 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('title', 'グロリアの扉コレクション')
-@section('class', 'entrance-list')
 @section('content')
-<div class="fixed-top">
-    <header class="px-1">
-        <ul class="row">
-            <li class="col-2 pl-4 bars-menu"><a href="#"><i class="fas fa-bars text-light"></i></a></li>
-            <li class="col-5 header-logo"><a href="/"><img src="{{ asset('image/logo_small.png') }}" alt="" hight="27px" width="107px"></a></li>
-            <li class="col-5 text-right pr-4">
-                <a href="#"><span class="p-2 badge badge-pill badge-warning"><i class="fas fa-bell text-light"></i></span></a>
-                <a href="{{ action('EntrancesController@mypage') }}"><span class="ml-2 p-2 badge badge-pill badge-warning"><i class="fas fa-user-alt text-light"></i></span></a>
-            </li>
-
-        </ul>
-    </header>
-</div>
-<div class="searchbox">
-    <div class="nav-tabs-wrap">
-        <ul class="nav nav-tabs m-2">
-            <li class="mr-2"><a href="#"><img src="https://placehold.jp/125x62.png" alt=""></a></li>
-            <li class="mr-2"><a href="#"><img src="https://placehold.jp/125x62.png" alt=""></a></li>
-            <li class="mr-2"><a href="#"><img src="https://placehold.jp/125x62.png" alt=""></a></li>
-            <li class="mr-2"><a href="#"><img src="https://placehold.jp/125x62.png" alt=""></a></li>
-            <li class="mr-2"><a href="#"><img src="https://placehold.jp/125x62.png" alt=""></a></li>
-            <li class="mr-2"><a href="#"><img src="https://placehold.jp/125x62.png" alt=""></a></li>
-        </ul>
+<?php $statusList = ['非表示', '表示', '閉店']; ?>
+<div class="container mt-4">
+    <h2>扉データ一覧</h2>
+    <div class="table-responsive table-striped">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>店名</th>
+                    <th>住所</th>
+                    <th>詳細</th>
+                    <th>緯度/経度</th>
+                    <th>営業時間</th>
+                    <th>最終更新日</th>
+                    <th>作成者</th>
+                    <th>ステータス</th>
+                    <th>ユーザー削除</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($entrances as $entrance)
+                    <tr>
+                        <td>{{ $entrance->id }}</td>
+                        <td style="min-width: 250px;"><a href="{{ url('entrances/'.$entrance->id) }}">{{ $entrance->name }}</a></td>
+                        <td style="min-width: 250px;">{{ $entrance->address }}</td>
+                        <td style="min-width: 250px;">{{ $entrance->detail }}</td>
+                        <td>{{ $entrance->lat . " / " . $entrance->lng }}</td>
+                        <td class="text-nowrap">
+                            @if (isset($entrance->open_hour_1))
+                                @for ($i = 1; $i < 7; $i++)
+                                    {{ $entrance->{"open_hour_".$i} }}<br>
+                                @endfor
+                            @endif
+                        </td>
+                        <td class="text-nowrap">{{ date('Y/n/j H:i', strtotime($entrance->updated_at)) }}</td>
+                        <td class="text-nowrap">{{ $entrance->user_name }}</td>
+                        <td class="text-nowrap">
+                           {{ $statusList[$entrance->status] }}
+                            <a href="#" data-toggle="modal" data-target="#statusModal{{ $entrance->id }}"> [変更]</a><br>
+                        </td>
+                        <td class="text-nowrap">
+                           {{ isset($entrance->deleted_at) ? '削除済み' : '' }}
+                        </td>
+                    </tr>
+                    <div class="modal fade" id="statusModal{{ $entrance->id }}" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h6 class="modal-title">扉ステータスの変更</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                {!! Form::open(['route' => ['entrances.updateStatus',$entrance->id], 'method'=>'put', 'class' => 'status-form']) !!}
+                                    <div class="modal-body">
+                                        <p>「{{ $entrance->name }} 」この扉のステータスを変更します。</p>
+                                        <div class="form-group">
+                                            <label for="status">扉ステータス</label>
+                                            <select id="status" name="status" class="form-control">
+                                                @foreach ($statusList as $key => $status)
+                                                    <option value="{{ $key }}" {{ $entrance->status == $key ? 'selected' : null }}>{{ $statusList[$key] }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                                            {!! Form::submit('変更する', ['class' => 'btn btn-danger']) !!}
+                                    </div><!-- /.modal-footer -->
+                                {!! Form::close() !!}
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                @endforeach
+            </tbody>
+        </table>
     </div>
-    <div class="card">
-        <div class="card-header">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item bg-gray select-range">
-                    <div class="button-radio">
-                        <span class="list-inline-item mx-2 lead"><i class="fas fa-map-marker-alt"></i></span>
-                        <input id="50M" type="radio"name="range" value="50M" checked>
-                        <label for="50M" class="ml-2" >50M圏内</label>
-                        <input id="100M" type="radio" name="range" value="100M">
-                        <label for="100M">100M圏内</label>
-                        <input id="non" type="radio" name="range" value="non">
-                        <label for="non">指定しない</label>
-                    </div>
-                </li>
-                <li class="list-group-item py-1">
-                    <ul class="list-inline">
-                        <form>
-                            <div class="row">
-                                <li class="list-inline-item mx-2 lead"><i class="fas fa-search"></i></li>
-                                <li class="col-10 list-inline-item">
-                                    <input type="text" class="form-control align-middle" placeholder="目的地か住所を入力してください">
-                                </li>
-                            </div>
-                        </form>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+    <div class="mt-2">
+        {{ $entrances->links() }}
     </div>
-</div><!-- searchbox -->
-<div class="card gallery">
-	<ul class="row">
-		<li class="col-6"><a href="{{ action('EntrancesController@show') }}"><img src="https://placehold.jp/186x140.png" alt="" class="img-fluid"><p><span class="text-white">スターバックスコーヒーたま…</span></p></a></li>
-		<li class="col-6"><a href="#"><img src="https://placehold.jp/186x140.png" alt="" class="img-fluid"><p><span class="text-white">スターバックスコーヒーたま…</span></p></a></li>
-		<li class="col-6"><a href="#"><img src="https://placehold.jp/186x140.png" alt="" class="img-fluid"><p><span class="text-white">スターバックスコーヒーたま…</span></p></a></li>
-		<li class="col-6"><a href="#"><img src="https://placehold.jp/186x140.png" alt="" class="img-fluid"><p><span class="text-white">スターバックスコーヒーたま…</span></p></a></li>
-		<li class="col-6"><a href="#"><img src="https://placehold.jp/186x140.png" alt="" class="img-fluid"><p><span class="text-white">スターバックスコーヒーたま…</span></p></a></li>
-		<li class="col-6"><a href="#"><img src="https://placehold.jp/186x140.png" alt="" class="img-fluid"><p><span class="text-white">スターバックスコーヒーたま…</span></p></a></li>
-		<li class="col-6"><a href="#"><img src="https://placehold.jp/186x140.png" alt="" class="img-fluid"><p><span class="text-white">スターバックスコーヒーたま…</span></p></a></li>
-		<li class="col-6"><a href="#"><img src="https://placehold.jp/186x140.png" alt="" class="img-fluid"><p><span class="text-white">スターバックスコーヒーたま…</span></p></a></li>
-		<li class="col-6"><a href="#"><img src="https://placehold.jp/186x140.png" alt="" class="img-fluid"><p><span class="text-white">スターバックスコーヒーたま…</span></p></a></li>
-		<li class="col-6"><a href="#"><img src="https://placehold.jp/186x140.png" alt="" class="img-fluid"><p><span class="text-white">スターバックスコーヒーたま…</span></p></a></li>
-		<li class="col-6"><a href="#"><img src="https://placehold.jp/186x140.png" alt="" class="img-fluid"><p><span class="text-white">スターバックスコーヒーたま…</span></p></a></li>
-	</ul>
-</div>
-<div class="btn-group d-flex fixed-bottom bg-white">
-    <a href="{{ action('EntrancesController@index') }}" class="btn btn-outline-light w-100 text-warning py-3"><i class="fas fa-search mr-3"></i>SEARCH</a>
-    <a href="#" class="btn btn-outline-light w-100 text-danger py-3"><i class="fas fa-camera mr-3"></i>POST</a>
 </div>
 @endsection
