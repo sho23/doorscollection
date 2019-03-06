@@ -7,6 +7,7 @@ use DB;
 use Image;
 use Storage;
 use App\Entrance;
+use App\Claim;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,6 +21,19 @@ class EntrancesController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['show']);
+    }
+
+    public function index()
+    {
+        $user = \Auth::user();
+        if (strval($user->id) !== env('AUTH_USER', null)) {
+            return redirect()->route('home.index')->with('faild', '権限がありません');
+        }
+
+        $query = Entrance::query();
+        $entrances = $query->select('entrances.*', 'users.name as user_name')
+                ->join('users', 'users.id', '=', 'entrances.user_id')->withTrashed()->orderBy('id', 'desc')->paginate(50);
+        return view('entrances.index', ['entrances' => $entrances]);
     }
 
     public function mypage()
@@ -47,6 +61,11 @@ class EntrancesController extends Controller
         return view('entrances.show', compact('entrance', 'prevUrl', 'user'));
     }
 
+    public function claimcomplete()
+    {
+        return view('entrances.claimcomplete');
+    }
+
     public function edit($id)
     {
         if (!$this->uaSmt()) {
@@ -71,7 +90,7 @@ class EntrancesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-         'file' => [
+        'file' => [
                 'required',
                 'file',
                 'image',
@@ -130,6 +149,7 @@ class EntrancesController extends Controller
         $entrance->address = $request->address;
         $entrance->detail = $request->detail;
         $entrance->img_url = $request->img_url;
+        $entrance->status = config('const.ENTRANCE_SHOW');
         $entrance->lat = $lat;
         $entrance->lng = $lng;
         $openHours = $request->open_hours;
@@ -172,6 +192,43 @@ class EntrancesController extends Controller
         $entrance->detail = $request->detail;
         $entrance->save();
         return redirect()->route('entrances.show', $entrance->id)->with('succeed', '編集が完了しました');
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $user = \Auth::user();
+        if (strval($user->id) !== env('AUTH_USER', null)) {
+            return redirect()->route('home.index')->with('faild', '権限がありません');
+        }
+        $this->validate($request, [
+            'status' => 'required',
+        ]);
+        $entrance = Entrance::find($id);
+        $entrance->status = $request->status;
+        $entrance->save();
+        return redirect()->route('entrances.index')->with('succeed', '変更しました');
+    }
+
+    public function claim($id)
+    {
+        $entrance = DB::table('entrances')->where('id', $id)->first();
+        return view('entrances.claim', compact('entrance'));
+    }
+
+    public function storeClaim(Request $request, $id)
+    {
+        $user = \Auth::user();
+        $this->validate($request, [
+            'claim' => 'required',
+        ]);
+        $user = \Auth::user();
+        $claim = new Claim;
+        $claim->claim = $request->claim;
+        $claim->user_id = $user->id;
+        $claim->entrance_id = $id;
+        $claim->other = $request->other;
+        $claim->save();
+        return redirect()->route('entrances.claimcomplete');
     }
 
     public function destroy($id)

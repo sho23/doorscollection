@@ -404,6 +404,36 @@ ul.row {
 }
 
 
+.entrance-list .closed, .detail-page .closed > a {
+	background: #000;
+	position: relative;
+}
+.entrance-list .closed:before , .detail-page .closed > a:before {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	width: 61px;
+	height: 35px;
+	color: #ff0000;
+	font-size: 30px;
+	content: "閉店";
+}
+
+.detail-page .closed > a:before {
+	font-size: 50px;
+    width: 102px;
+    height: 70px;
+    background: #f7f4f4;
+    z-index: 1;
+}
+
+.entrance-list .closed img, .detail-page .closed img {
+	opacity: 0.5;
+}
+
 /*pcのためのCSS*/
 @media (min-width: 480px) {
 	body {

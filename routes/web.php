@@ -27,7 +27,13 @@ Route::resource('users', 'UserController');
 Route::get('/leave', 'UserController@leave')->name('users.leave');
 Route::post('/leavingStore', 'UserController@leavingStore')->name('users.leavingStore');
 Route::put('updateStatus/{id}', 'UserController@updateStatus')->name('users.updateStatus');
+Route::put('entrances/updateStatus/{id}', 'EntrancesController@updateStatus')->name('entrances.updateStatus');
+Route::get('claim/{id}', 'EntrancesController@claim')->name('entrances.claim');
+Route::get('/claimcomplete', 'EntrancesController@claimcomplete')->name('entrances.claimcomplete');
+Route::post('/storeClaim{id}', 'EntrancesController@storeClaim')->name('entrances.storeClaim');
 Route::put('updateVerify/{id}', 'UserController@updateVerify')->name('users.updateVerify');
+Route::get('/claims', 'ClaimsController@index')->name('claim.index');
+
 
 Route::get('/login/twitter', 'Auth\SocialController@getTwitterAuth');
 Route::get('/login/twitter/callback', 'Auth\SocialController@getTwitterAuthCallback');
