@@ -5,6 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta name="description" content="<?php echo $__env->yieldContent('detail') !== '' ? $__env->yieldContent('detail') : 'ドアコレ〜ミチマヨ（方向音痴）のためのイン◯タグラム〜！？お店や建物の扉写真を検索＆投稿できるグロリアの扉コレクションは、「目的地周辺」で迷子になってしまったあなたをすばやく救済してくれる神サービス！あなたもグロリアと一緒に方向音痴に優しい社会を作りませんか？'; ?>">
+    <meta property="og:title"       content="目的地周辺”から一向にその先に進めないあなたへ｜グロリアの扉コレクション〜ドアコレ〜">
+    <meta property="og:site_name"   content="グロリアの扉コレクション">
+    <meta property="og:description" content="<?php echo $__env->yieldContent('detail') !== '' ? $__env->yieldContent('detail') : 'ドアコレ〜ミチマヨ（方向音痴）のためのイン◯タグラム〜！？お店や建物の扉写真を検索＆投稿できるグロリアの扉コレクションは、「目的地周辺」で迷子になってしまったあなたをすばやく救済してくれる神サービス！あなたもグロリアと一緒に方向音痴に優しい社会を作りませんか？'; ?>">
+    <meta property="og:url"         content="<?php echo $__env->yieldContent('url') !== '' ? $__env->yieldContent('url') : url('/'); ?>">
+    <meta property="og:type"        content="website">
+    <meta property="og:image"       content="<?php echo $__env->yieldContent('ogimg') !== '' ? url('/') . '/' . $__env->yieldContent('ogimg') : asset('image/gloria_ogp.jpg'); ?>">
+
+    <meta name="twitter:image"      content="<?php echo $__env->yieldContent('ogimg') !== '' ? url('/') . '/' . $__env->yieldContent('ogimg') : asset('image/gloria_ogp.jpg'); ?>">
+    <meta name="twitter:card"       content="summary_large_image">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -31,13 +42,8 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118256403-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-118256403-1');
-    </script>
+
+
 </head>
 <body class="@yield('parentClass', 'fixed-page')">
     <div id="loading"><img src="{{ asset('image/loading.gif') }}"></div>
