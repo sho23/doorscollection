@@ -54,32 +54,25 @@
     </div>
 </div><!-- searchbox -->
 {!! Form::close() !!}
-<div class="card gallery">
-    <div class="infinite-scroll">
-        <ul class="row">
-            @foreach ($entrances as $entrance)
-                <li class="col-6 {{ $entrance->status == config('const.ENTRANCE_CLOSED') ? 'closed' : '' }}"><a href="{{ action('EntrancesController@show', $entrance->id) }}"><img src="{{ asset('/storage/img/500/500x500_' . $entrance->img_url) }}" alt="" class="img-fluid"><p><span class="text-white">{{ $entrance->name }}</span></p></a></li>
-            @endforeach
-        </ul>
-        {{ $entrances->appends(['keyword'=>$keyword, 'categoryIds'=>$categoryIds, 'range' => $range])->render() }}
+@if(!$entrances->isEmpty())
+    <div class="card gallery">
+        <div class="infinite-scroll">
+            <ul class="row">
+                @foreach ($entrances as $entrance)
+                    <li class="col-6 {{ $entrance->status == config('const.ENTRANCE_CLOSED') ? 'closed' : '' }}"><a href="{{ action('EntrancesController@show', $entrance->id) }}"><img src="{{ asset('/storage/img/500/500x500_' . $entrance->img_url) }}" alt="" class="img-fluid"><p><span class="text-white">{{ $entrance->name }}</span></p></a></li>
+                @endforeach
+            </ul>
+            {{ $entrances->appends(['keyword'=>$keyword, 'categoryIds'=>$categoryIds, 'range' => $range])->render() }}
+        </div>
     </div>
-</div>
-@if (false)
-<div class="card usage pb-4 mb-5">
-	<div class="row">
-		<dev class="col-3 offset-1">
-			<img src="{{ asset('image/arrow.png') }}" alt="">
-		</dev>
-		<dev class="col-8"></dev>
-		<div class="col-3 offset-1"><img src="{{ asset('image/ic_gloria.png') }}" class="rounded-circle" alt=""></div>
-		<dev class="col-8 mt-3">
-			<p class="text-muted">
-				行きたい場所の外観を検索できます。<br>
-				みなサンの投稿を見てみまショウ。
-			</p>
-		</dev>
-	</div>
-</div>
+@else
+    <div class="card mt-4">
+        <div class="col-12">
+            <img class="img-fluid" src="{{ asset('image/case_empty.png') }}" alt="">
+        </div>
+        <p class="text-center mt-4">目的地の写真が見つからなかったみたいデス。<br>
+            ぜひあなたが1人目の投稿者になってくだサイ!</p>
+    </div>
 @endif
 <div class="btn-group d-flex fixed-bottom bg-white">
     <p class="mx-auto my-2 copywriter">© 2019 JOKERS LLC.</p>
