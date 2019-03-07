@@ -2,6 +2,7 @@
 @section('title', 'グロリアの扉コレクション')
 @section('parentClass', 'detail-page')
 @section('class', 'detail')
+@section('ogtitle', $entrance->name . ' の扉コレクション')
 @section('ogimg', 'storage/img/500/500x500_' . $entrance->img_url)
 @section('content')
 <div class="fixed-top">
