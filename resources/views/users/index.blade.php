@@ -71,12 +71,12 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title">ユーザーステータスの変更</h6>
+                <h6 class="modal-title">ユーザーの認証</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            {!! Form::open(['route' => ['users.updateVerify',$user->id], 'method'=>'put', 'class' => 'verify-form']) !!}
+            {!! Form::open(['route' => ['users.updateVerify', 0], 'method'=>'put', 'class' => 'verify-form']) !!}
                 <div class="modal-body">
                     <p></p>
                 </div>

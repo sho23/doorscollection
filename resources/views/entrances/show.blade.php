@@ -28,7 +28,7 @@
 			<td class="pb-3">{{ $entrance->detail }}<br>
 			<small>{{ $entrance->created_at }} に投稿</small></td>
 		</tr>
-		<tr class="text-right"><th></th><td><small><a class="text-secondary" href="{{ action('EntrancesController@claim', $entrance->id) }}">間違いを報告</a></small></td></tr>
+		<tr><th></th><td class="text-right"><small><a class="text-secondary" href="{{ action('EntrancesController@claim', $entrance->id) }}">間違いを報告</a></small></td></tr>
 	</table>
 </div>
 <div class="card bg-gray avatar-area py-2">

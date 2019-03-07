@@ -17,7 +17,7 @@ class CreateClaimsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('entrance_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->integer('claim');
             $table->text('other')->nullable();
             $table->timestamps();

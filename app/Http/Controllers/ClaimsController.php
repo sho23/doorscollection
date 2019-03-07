@@ -16,7 +16,7 @@ class ClaimsController extends Controller
 
         $query = Claim::query();
         $claims = $query->select('claims.*', 'users.name as user_name', 'entrances.name as entrance_name', 'entrances.status as entrance_status')
-                ->join('users', 'users.id', '=', 'claims.user_id')
+                ->leftJoin('users', 'users.id', '=', 'claims.user_id')
                 ->join('entrances', 'entrances.id', '=', 'claims.entrance_id')
                 ->orderBy('id', 'desc')->paginate(50);
         return view('claims.index', ['claims' => $claims]);

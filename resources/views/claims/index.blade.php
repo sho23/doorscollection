@@ -21,7 +21,7 @@
                     <tr>
                         <td>{{ $claim->id }}</td>
                         <td><a href="{{ action('EntrancesController@show', $claim->entrance_id) }}">{{ $claim->entrance_name }}</a></td>
-                        <td>{{ $claim->user_name }}</td>
+                        <td>{{ isset($claim->user_name) ? $claim->user_name : '未ログインユーザー' }}</td>
                         <td>{{ config('const.CLAIMS')[$claim->claim] }}</td>
                         <td>{{ $claim->other }}</td>
                         <td class="text-nowrap">
@@ -41,6 +41,7 @@
                                 {!! Form::open(['route' => ['entrances.updateStatus',$claim->entrance_id], 'method'=>'put', 'class' => 'status-form']) !!}
                                     <div class="modal-body">
                                         <p>「{{ $claim->entrance_name }} 」この扉のステータスを変更します。</p>
+                                        <input type="hidden" name="post_from" value="claim">
                                         <div class="form-group">
                                             <label for="status">扉ステータス</label>
                                             <select id="status" name="status" class="form-control">
