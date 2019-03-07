@@ -41,7 +41,6 @@
                 <li><a href="#section27">店名があっているはずなのに検索結果に出てこないのはなぜ？</a></li>
                 <li><a href="#section28">投稿の著作権って？</a></li>
                 <li><a href="#section29">他のサイトから写真を流用してもいい？</a></li>
-                <li><a href="#section30">投稿していい写真はどんな写真？</a></li>
             </ol>
         </div>
         <hr>
