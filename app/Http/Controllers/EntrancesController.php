@@ -20,7 +20,7 @@ class EntrancesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except(['show']);
+        $this->middleware('auth')->except(['show', 'claim', 'claimcomplete', 'storeClaim']);
     }
 
     public function index()
@@ -206,7 +206,12 @@ class EntrancesController extends Controller
         $entrance = Entrance::find($id);
         $entrance->status = $request->status;
         $entrance->save();
-        return redirect()->route('entrances.index')->with('succeed', '変更しました');
+        $postFrom = $request->post_from;
+        $redirectRoute = 'entrances.index';
+        if (isset($postFrom) && $postFrom == 'claim') {
+            $redirectRoute = 'claims.index';
+        }
+        return redirect()->route($redirectRoute)->with('succeed', '変更しました');
     }
 
     public function claim($id)
@@ -221,10 +226,11 @@ class EntrancesController extends Controller
         $this->validate($request, [
             'claim' => 'required',
         ]);
-        $user = \Auth::user();
         $claim = new Claim;
         $claim->claim = $request->claim;
-        $claim->user_id = $user->id;
+        if (isset($user)) {
+            $claim->user_id = $user->id;
+        }
         $claim->entrance_id = $id;
         $claim->other = $request->other;
         $claim->save();

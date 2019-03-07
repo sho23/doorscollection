@@ -434,6 +434,15 @@ ul.row {
 	opacity: 0.5;
 }
 
+/*qaページ*/
+.qa-page {
+	margin: 30px auto;
+}
+.qa-page hr {
+	border-top: 1px solid #f0f0f0;
+	width: 100%;
+}
+
 /*pcのためのCSS*/
 @media (min-width: 480px) {
 	body {

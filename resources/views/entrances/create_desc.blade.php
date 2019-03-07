@@ -2,18 +2,7 @@
 @section('title', 'グロリアの扉コレクション')
 @section('class', 'entrance-list')
 @section('content')
-<div class="fixed-top">
-    <header class="px-1">
-        <ul class="row">
-            <li class="col-2 pl-4 bars-menu"><a href="#sidr" id="simple-menu"><i class="fas fa-bars text-light"></i></a></li>
-            <li class="col-5 header-logo"><a href="/"><img src="{{ asset('image/logo_small.png') }}" alt="" hight="27px" width="107px"></a></li>
-            <li class="col-5 text-right pr-4">
-                <a href="#"><span class="p-2 badge badge-pill badge-warning"><i class="fas fa-bell text-light"></i></span></a>
-                <a href="{{ action('EntrancesController@mypage') }}"><span class="ml-2 p-2 badge badge-pill badge-warning"><i class="fas fa-user-alt text-light"></i></span></a>
-            </li>
-        </ul>
-    </header>
-</div>
+@include('layouts.header')
 <div id="wrap">
     <div class="container">
         {!! Form::open(['route' => ['entrances.storeDesc'], 'method' => 'post']) !!}
@@ -45,7 +34,7 @@
                             <label for="category">店のジャンル</label>
                             <select id="category" name="category" class="form-control">
                                 @foreach ($categoryList as $category)
-                                    <option value="{{ $category->id }}" {{ $category->id == old('category') ? 'selected' : null }}>{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}" {{ $category->id == old('category') ? 'selected' : null }}>{{ $category->ja_name }}</option>
                                 @endforeach
                             </select>
                         </div>

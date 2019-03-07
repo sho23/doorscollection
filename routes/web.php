@@ -32,7 +32,7 @@ Route::get('claim/{id}', 'EntrancesController@claim')->name('entrances.claim');
 Route::get('/claimcomplete', 'EntrancesController@claimcomplete')->name('entrances.claimcomplete');
 Route::post('/storeClaim{id}', 'EntrancesController@storeClaim')->name('entrances.storeClaim');
 Route::put('updateVerify/{id}', 'UserController@updateVerify')->name('users.updateVerify');
-Route::get('/claims', 'ClaimsController@index')->name('claim.index');
+Route::get('/claims', 'ClaimsController@index')->name('claims.index');
 
 
 Route::get('/login/twitter', 'Auth\SocialController@getTwitterAuth');
