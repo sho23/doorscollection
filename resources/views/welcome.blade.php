@@ -4,6 +4,18 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <meta name="description" content="ドアコレ〜ミチマヨ（方向音痴）のためのイン◯タグラム〜！？お店や建物の扉写真を検索＆投稿できるグロリアの扉コレクションは、「目的地周辺」で迷子になってしまったあなたをすばやく救済してくれる神サービス！あなたもグロリアと一緒に方向音痴に優しい社会を作りませんか？">
+        <meta property="og:title"       content="目的地周辺”から一向にその先に進めないあなたへ｜グロリアの扉コレクション〜ドアコレ〜">
+        <meta property="og:site_name"   content="グロリアの扉コレクション">
+        <meta property="og:description" content="ドアコレ〜ミチマヨ（方向音痴）のためのイン◯タグラム〜！？お店や建物の扉写真を検索＆投稿できるグロリアの扉コレクションは、「目的地周辺」で迷子になってしまったあなたをすばやく救済してくれる神サービス！あなたもグロリアと一緒に方向音痴に優しい社会を作りませんか？">
+        <meta property="og:url"         content="<?php echo url('/'); ?>">
+        <meta property="og:type"        content="website">
+        <meta property="og:image"       content="<?php echo asset('image/gloria_ogp.jpg'); ?>">
+
+        <meta name="twitter:image"      content="<?php echo asset('image/gloria_ogp.jpg'); ?>">
+        <meta name="twitter:card"       content="summary_large_image">
+
+
         <title>グロリアの扉コレクション</title>
 
         <link rel="shortcut icon" href="{{ asset('image/favicon.ico') }}">
@@ -14,6 +26,16 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135750696-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-135750696-1');
+        </script>
     </head>
     <body class="top-page">
     <div class="container-fulid">
