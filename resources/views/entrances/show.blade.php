@@ -4,6 +4,7 @@
 @section('class', 'detail')
 @section('ogtitle', $entrance->name . ' の扉コレクション')
 @section('ogimg', 'storage/img/500/500x500_' . $entrance->img_url)
+@section('url', Request::url())
 @section('content')
 <div class="fixed-top">
 	<header class="px-2 py-3">
@@ -28,7 +29,7 @@
 		<tr class="align-top"><th class="text-center"><i class="fas fa-map-marker-alt mr-4"></i></th><td class="pb-3">{{ $entrance->address }}</td></tr>
 		<tr class="align-top"><th class="text-center"><i class="fas fa-comment mr-4"></i></th>
 			<td class="pb-3">{{ $entrance->detail }}<br>
-			<small>{{ $entrance->created_at }} に投稿</small></td>
+			<small>{{ $entrance->created_at }}に投稿</small></td>
 		</tr>
 		<tr><th></th><td class="text-right"><small><a class="text-secondary" href="{{ action('EntrancesController@claim', $entrance->id) }}">間違いを報告</a></small></td></tr>
 	</table>
