@@ -2,7 +2,7 @@
 @section('title', 'グロリアの扉コレクション')
 @section('parentClass', 'detail-page')
 @section('class', 'detail')
-@section('ogimg', asset('/storage/img/500/500x500_' . $entrance->img_url))
+@section('ogimg', asset('storage/img/500/500x500_' . $entrance->img_url))
 @section('content')
 <div class="fixed-top">
 	<header class="px-2 py-3">

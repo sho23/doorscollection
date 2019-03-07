@@ -42,8 +42,14 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135750696-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-
+      gtag('config', 'UA-135750696-1');
+    </script>
 </head>
 <body class="@yield('parentClass', 'fixed-page')">
     <div id="loading"><img src="{{ asset('image/loading.gif') }}"></div>
