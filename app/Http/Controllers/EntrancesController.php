@@ -57,7 +57,7 @@ class EntrancesController extends Controller
         $entrance = DB::table('entrances')->where('id', $id)->first();
         $prevPage = url()->previous();
         $prevPath = parse_url($prevPage);
-        if (isset($prevPath) && $prevPath['path'] == '/entrances/mypage') {
+        if (in_array("path", $prevPath) && $prevPath['path'] == '/entrances/mypage') {
             $prevUrl = url('/entrances/mypage');
         } else {
             $prevUrl = url('home');
