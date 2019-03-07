@@ -34,7 +34,7 @@
                             <label for="category">店のジャンル</label>
                             <select id="category" name="category" class="form-control">
                                 @foreach ($categoryList as $category)
-                                    <option value="{{ $category->id }}" {{ $category->id == old('category') ? 'selected' : null }}>{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}" {{ $category->id == old('category') ? 'selected' : null }}>{{ $category->ja_name }}</option>
                                 @endforeach
                             </select>
                         </div>
