@@ -32,6 +32,13 @@
         </ul>
         {{ $entrances->links() }}
     </div>
+    @else
+        <div class="card m-4 pb-4 mb-5">
+            <div class="col-12">
+                <img class="img-fluid" src="{{ asset('image/yeswecan.png') }}" alt="">
+            </div>
+            <p class="text-center mt-4">お出かけ先の扉をコレクションして、目的地へのヒントをどんどん増やしていきましょう！！</p>
+        </div>
     @endif
 </div>
 <div class="btn-group d-flex fixed-bottom bg-white">
