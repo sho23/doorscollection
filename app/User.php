@@ -37,4 +37,13 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new EmailVerificationJa);
     }
+
+    public function likes(){
+      return $this->hasMany('App\Like');
+    }
+ 
+    public function entrance(){
+      return $this->hasMany('App\Entrance');
+    }
+
 }

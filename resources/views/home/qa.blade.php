@@ -74,7 +74,7 @@
         <hr>
         <div id="section6" class="mx-4">
             <h6>6   エラーが表示されるのだが、どうしたらよい？</h6>
-            <p>お手数ですが〇〇宛に発生状況をお知らせください。</p>
+            <p>お手数ですが nwada@team-jokers.com 宛に発生状況をお知らせください。</p>
         </div>
         <hr>
         <div id="section7" class="mx-4">
@@ -90,12 +90,12 @@
         <hr>
         <div id="section9" class="mx-4">
             <h6>9   画像がアップロードできない</h6>
-            <p>お手数ですが〇〇宛に発生状況をお知らせください。</p>
+            <p>お手数ですが nwada@team-jokers.com 宛に発生状況をお知らせください。</p>
         </div>
         <hr>
         <div id="section10" class="mx-4">
             <h6>10  投稿していい写真はどんな写真？</h6>
-            <p></p>
+            <p>地図上で、「目的地周辺情報」には辿り着けているのに肝心の入り口が見つからない！という人へのヒントになるような写真の投稿をお願いいたします。入り口と無関係の写真や、人物の写り込んだ写真などの投稿はご遠慮ください。</p>
         </div>
         <hr>
         <div id="section11" class="mx-4">
@@ -140,7 +140,7 @@
         <hr>
         <div id="section19" class="mx-4">
             <h6>19  ログインができない</h6>
-            <p>「<a href="{{ url('password/reset') }}">パスワードを忘れた場合</a>」のボタンから再設定をお試しいただき、それでもログインできない場合は、〇〇宛に発生状況をお知らせください。</p>
+            <p>「<a href="{{ url('password/reset') }}">パスワードを忘れた場合</a>」のボタンから再設定をお試しいただき、それでもログインできない場合は、 nwada@team-jokers.com 宛に発生状況をお知らせください。</p>
         </div>
         <hr>
         <div id="section20" class="mx-4">
@@ -170,7 +170,7 @@
         <hr>
         <div id="section25" class="mx-4">
             <h6>25  運営会社ってどんなところ？</h6>
-            <p></p>
+            <p>準備中</p>
         </div>
         <hr>
         <div id="section26" class="mx-4">
@@ -185,12 +185,12 @@
         <hr>
         <div id="section28" class="mx-4">
             <h6>28  投稿の著作権って？</h6>
-            <p></p>
+            <p>準備中</p>
         </div>
         <hr>
         <div id="section29" class="mx-4">
             <h6>29  他のサイトから写真を流用してもいい？</h6>
-            <p></p>
+            <p>準備中</p>
         </div>
     </div>
 </div>
