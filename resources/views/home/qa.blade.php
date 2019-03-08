@@ -3,7 +3,7 @@
 @section('class', 'entrance-list qa-page')
 @section('content')
 @include('layouts.header')
-<div class="card pb-4 mb-5">
+<div class="card usage  ">
     <div class="row">
         <div class="m-4">
             <h5>Q&A</h5>
@@ -170,7 +170,7 @@
         <hr>
         <div id="section25" class="mx-4">
             <h6>25  運営会社ってどんなところ？</h6>
-            <p>準備中</p>
+            <p><a href="https://team-jokers.tokyo" target="_blank">合同会社JOKERS</a>をご確認ください！</p>
         </div>
         <hr>
         <div id="section26" class="mx-4">
@@ -185,12 +185,12 @@
         <hr>
         <div id="section28" class="mx-4">
             <h6>28  投稿の著作権って？</h6>
-            <p>準備中</p>
+            <p>本サービスの利用規約　第9条（権利帰属）にて記載しておりますので、お手数ですがご確認ください。</p>
         </div>
         <hr>
         <div id="section29" class="mx-4">
             <h6>29  他のサイトから写真を流用してもいい？</h6>
-            <p>準備中</p>
+            <p>本サービスの利用規約　第9条（権利帰属）にて記載しておりますので、お手数ですがご確認ください。</p>
         </div>
     </div>
 </div>

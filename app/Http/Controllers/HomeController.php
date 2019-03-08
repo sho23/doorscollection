@@ -17,7 +17,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'policy', 'qa']);
+        $this->middleware('auth')->except(['index', 'policy', 'qa', 'terms']);
     }
 
     /**
@@ -67,9 +67,15 @@ class HomeController extends Controller
 
        return view('home.index', compact('categoryList', 'entrances', 'keyword', 'categoryIds', 'range'));
     }
+
     public function policy()
     {
         return view('home.policy');
+    }
+
+    public function terms()
+    {
+        return view('home.terms');
     }
 
     public function qa()
