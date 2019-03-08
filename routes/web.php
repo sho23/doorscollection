@@ -33,7 +33,8 @@ Route::get('/claimcomplete', 'EntrancesController@claimcomplete')->name('entranc
 Route::post('/storeClaim{id}', 'EntrancesController@storeClaim')->name('entrances.storeClaim');
 Route::put('updateVerify/{id}', 'UserController@updateVerify')->name('users.updateVerify');
 Route::get('/claims', 'ClaimsController@index')->name('claims.index');
-
+Route::post('/like','EntrancesController@postLikeEntrance')->name('like');
+Route::post('/dislike','EntrancesController@postDisLikeEntrance')->name('dislike');
 
 Route::get('/login/twitter', 'Auth\SocialController@getTwitterAuth');
 Route::get('/login/twitter/callback', 'Auth\SocialController@getTwitterAuthCallback');

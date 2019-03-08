@@ -8,6 +8,7 @@ use Image;
 use Storage;
 use App\Entrance;
 use App\Claim;
+use App\Like;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Auth;
 
@@ -62,7 +63,12 @@ class EntrancesController extends Controller
         } else {
             $prevUrl = url('home');
         }
-        return view('entrances.show', compact('entrance', 'prevUrl', 'user'));
+        $liked = false;
+        if($user != null && $user->likes()->where('entrance_id', $entrance->id)->first() != null) {
+            $liked = true;
+        }
+
+        return view('entrances.show', compact('entrance', 'prevUrl', 'user', 'liked'));
     }
 
     public function claimcomplete()
@@ -284,6 +290,48 @@ class EntrancesController extends Controller
     //     }
     //     return array($suggestList, $categoryList);
     // }
+
+    public function postLikeEntrance(Request $request)
+    {
+        $post_id = $request['postId'];
+        $entrance = Entrance::find($post_id);
+        if (!$entrance) {
+            return null;
+        }
+        $user = Auth::user();
+        $like = $user->likes()->where('entrance_id', $post_id)->first();
+        if ($like) {
+            return null;
+        } else {
+            $like = new Like();
+            $entrance->like_count = $entrance->like_count + 1;
+            $entrance->save();
+        }
+        $like->like = 1;
+        $like->user_id = $user->id;
+        $like->entrance_id = $entrance->id;
+
+        $like->save();
+
+        return $entrance->like_count;
+   }
+
+    public function postDisLikeEntrance(Request $request)
+    {
+        $post_id = $request['postId'];
+        $entrance = Entrance::find($post_id);
+        $user = Auth::user();
+        $liked = Like::where('entrance_id', $post_id)->where('user_id', $user->id)->where('like', 1)->select('id')->first();
+        if (!$liked) {
+            return null;
+        } else {
+            $like = Like::find($liked->id);
+            $like->delete();
+            $entrance->like_count = $entrance->like_count - 1;
+            $entrance->save();
+        }
+        return $entrance->like_count;
+   }
 
     private function checkEntranceAuth($entranceId)
     {

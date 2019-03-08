@@ -32,6 +32,7 @@ class CreateEntrancesTable extends Migration
             $table->string('open_hour_5')->nullable();
             $table->string('open_hour_6')->nullable();
             $table->string('open_hour_7')->nullable();
+            $table->integer('like_count')->default(0);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
             $table->softDeletes();

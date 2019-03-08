@@ -443,6 +443,12 @@ ul.row {
 	width: 100%;
 }
 
+.react-buttons .hide {
+	display: none;
+}
+.react-buttons .show {
+	display: block;
+}
 /*pcのためのCSS*/
 @media (min-width: 480px) {
 	body {

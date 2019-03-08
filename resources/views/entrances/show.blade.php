@@ -46,7 +46,12 @@
 	<ul class="row react-buttons">
 		<li class="col text-white bg-info"><a href="http://twitter.com/share?url={{ Request::url() }}" target="_blank" class="p-3"><i class="fab fa-twitter"></i>　Twitter</a></li>
 		<li class="col text-white bg-primary"><a href="https://www.facebook.com/sharer/sharer.php?u={{ Request::url() }}" target="_blank" class="p-3"><i class="fab fa-facebook-f"></i>　Facebook</a></li>
-		<li class="col text-white bg-danger"><a href="#" class="p-3"><i class="fas fa-heart"></i>　Like</a></li>
+		@if(Auth::user() != null)
+			<li class="col text-white bg-danger">
+				<a href="javascript:void(0)" class="p-3 dislike {{ $liked ? 'show' : 'hide' }}"><i class="far fa-heart"></i>　Liked ({{ $entrance->like_count }})</a>
+				<a href="javascript:void(0)" class="p-3 like {{ $liked ? 'hide' : 'show' }}"><i class="fas fa-heart"></i>　Like ({{ $entrance->like_count }})</a>
+			</li>
+		@endif
 	</ul>
 </div>
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel">
@@ -71,3 +76,51 @@
 </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 @endsection
+@push('js')
+	<script>
+		var postId = 0;
+		$('.like').on('click', function() {
+			$this = $(this);
+			postId = '{{ $entrance->id }}';
+			$.ajax({
+					method: 'POST',
+					url: urlLike,
+					data: {postId: postId, _token: token},
+			}).done(function(data) {
+				$(".react-buttons .dislike").addClass('show');
+				$(".react-buttons .dislike").removeClass('hide');
+				$(".react-buttons .like").addClass('hide');
+				$(".react-buttons .like").removeClass('show');
+				$(".react-buttons .dislike").html('<i class="far fa-heart"></i>　Liked (' + data + ')');
+			}).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+				$("#XMLHttpRequest").html("XMLHttpRequest : " + XMLHttpRequest.status);
+				$("#textStatus").html("textStatus : " + textStatus);
+				$("#errorThrown").html("errorThrown : " + errorThrown.message);
+			});
+		});
+
+		$('.dislike').on('click', function() {
+			$this = $(this);
+			postId = '{{ $entrance->id }}';
+			$.ajax({
+					method: 'POST',
+					url: urlDisLike,
+					data: {postId: postId, _token: token},
+			}).done(function(data) {
+				$(".react-buttons .dislike").addClass('hide');
+				$(".react-buttons .dislike").removeClass('show');
+				$(".react-buttons .like").addClass('show');
+				$(".react-buttons .like").removeClass('hide');
+				$(".react-buttons .like").html('<i class="fas fa-heart"></i>　Like (' + data + ')');
+			}).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+				$("#XMLHttpRequest").html("XMLHttpRequest : " + XMLHttpRequest.status);
+				$("#textStatus").html("textStatus : " + textStatus);
+				$("#errorThrown").html("errorThrown : " + errorThrown.message);
+			});
+		});
+
+		var token = '{{ Session::token() }}';
+		var urlLike = '{{ route('like') }}';
+		var urlDisLike = '{{ route('dislike') }}';
+	</script>
+@endpush
