@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('title', 'グロリアの扉コレクション')
-@section('class', 'entrance-list')
+@section('class', 'single-page')
 @section('content')
 @include('layouts.header')
-<div class="card usage pb-4 mb-5">
+<div class="card usage">
     <div class="row">
         <div class="m-4">
             <h5>プライバシーポリシー</h5>

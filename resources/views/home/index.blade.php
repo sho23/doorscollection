@@ -66,7 +66,7 @@
         </div>
     </div>
 @else
-    <div class="card mt-4 pb-4 mb-5">
+    <div class="card mt-4 pb-7 mb-5">
         <div class="col-12">
             <img class="img-fluid" src="{{ asset('image/case_empty.png') }}" alt="">
         </div>
