@@ -111,7 +111,7 @@ class EntrancesController extends Controller
 
         if ($request->file('file')->isValid([])) {
             $filename = $request->file->store('', ['disk' => 'public']);
-            $img = Image::make("storage/img/" . $filename)->orientate();
+            $img = Image::make(public_path('storage/img/' . $filename))->orientate();
 
             if ($img->height() > $img->width()) {
                 $height = 500;
