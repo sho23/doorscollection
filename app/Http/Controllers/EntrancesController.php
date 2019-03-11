@@ -148,9 +148,9 @@ class EntrancesController extends Controller
         $lat = $request->lat;
         $lng = $request->lng;
         if (empty($lat)) {
-            $json = $this->callAPI($request->address);
-            $lat = $json->lat;
-            $lng = $json->lng;
+            $latlng = $this->callAPI($request->address);
+            $lat = $latlng['lat'];
+            $lng = $latlng['lng'];
         }
         $entrance = new Entrance;
         $user = \Auth::user();
@@ -195,9 +195,9 @@ class EntrancesController extends Controller
         $entrance->name = $request->name;
         $entrance->category_id = $request->category;
         if ($entrance->address !== $request->address) {
-            $json = $this->callAPI($request->address);
-            $entrance->lat = $json->lat;
-            $entrance->lng = $json->lng;
+            $latlng = $this->callAPI($request->address);
+            $entrance->lat = $latlng['lat'];
+            $entrance->lng = $latlng['lng'];
         }
         $entrance->address = $request->address;
         $entrance->detail = $request->detail;
@@ -354,7 +354,20 @@ class EntrancesController extends Controller
 
     private function callAPI(string $url)
     {
-        $result = simplexml_load_file('https://www.geocoding.jp/api/?v=1.1&q=' . $url);
-        return $result->coordinate;
+        $json = 'https://maps.googleapis.com/maps/api/geocode/json';
+        $json .= '?address=' . $url;
+        $json .= '&language=ja';
+        $json .= '&key=AIzaSyAyd89-4iN5ZVlDG1AlWvUDmEHW37UAxgk';
+
+        $conn = curl_init();
+        curl_setopt($conn, CURLOPT_URL, $json);
+        curl_setopt($conn, CURLOPT_RETURNTRANSFER, true);
+        $res =  curl_exec($conn);
+        $arr = json_decode($res);
+        curl_close($conn);
+        if (empty($arr->results[0])) return;
+        $latlng['lat'] = $arr->results[0]->geometry->location->lat;
+        $latlng['lng'] = $arr->results[0]->geometry->location->lng;
+        return $latlng;
     }
 }

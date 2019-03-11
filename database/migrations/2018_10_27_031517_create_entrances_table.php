@@ -22,8 +22,8 @@ class CreateEntrancesTable extends Migration
             $table->string('address')->nullable();
             $table->string('detail')->nullable();
             $table->integer('status')->default(0);
-            $table->double('lat', 15, 8);
-            $table->double('lng', 15, 8);
+            $table->double('lat', 15, 8)->nullable();
+            $table->double('lng', 15, 8)->nullable();
             $table->string('img_url');
             $table->string('open_hour_1')->nullable();
             $table->string('open_hour_2')->nullable();
