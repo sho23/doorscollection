@@ -12,7 +12,6 @@
         "laravel/framework": "5.7.*",
         "laravel/socialite": "^4.1",
         "laravel/tinker": "^1.0",
-        "halilim/xml-iterator": "^1.0",
         "laravelcollective/html": "^5.7"
     },
     "require-dev": {
