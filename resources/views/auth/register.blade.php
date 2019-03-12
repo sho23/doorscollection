@@ -62,13 +62,14 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
-                        <div class="mx-4 mt-4">
-                            <h6><a href="{{ url('terms') }}" target="_blank"><i class="fas fa-book"></i> 利用規約</a></h6>
+                        <div class= "mx-4 mt-4">
+                            <p><a href="{{ url('terms') }}" target="_blank"><i class="fas fa-book"></i> 利用規約</a></p>
+                            <p><a href="{{ url('policy') }}" target="_blank"><i class="fas fa-book"></i> プライバシーポリシー</a></p>
                         </div>
                         <div class="form-group row mb-0 mt-4">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-success">
-                                    利用規約に同意して登録
+                                    <small>利用規約及びプライバシーポリシーに同意して</small><br>登録する
                                 </button>
                             </div>
                         </div>
