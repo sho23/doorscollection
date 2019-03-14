@@ -403,6 +403,10 @@ ul.row {
 	border-top: 5px solid #efc055 !important;
 }
 
+.entrance-list .fixed-bottom .text-danger.active {
+	border-top: 5px solid #cb514e !important;
+}
+
 
 .entrance-list .closed, .detail-page .closed > a {
 	background: #000;
