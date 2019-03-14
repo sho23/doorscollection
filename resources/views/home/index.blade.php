@@ -3,6 +3,12 @@
 @section('class', 'entrance-list')
 @section('content')
 @include('layouts.header')
+ @if (session('flash_message'))
+    <div class="alert alert-success m-0">
+        {{ session('flash_message') }}
+    </div>
+@endif
+
 {!! Form::open(['route' => ['home.index'], 'method' => 'get', 'class' => 'search-form']) !!}
 {{ csrf_field() }}
 <input type="hidden" name="lat" value="">
@@ -93,6 +99,7 @@
             $('.entrance-form').submit();
         });
         $(function() {
+            $('.alert-success').fadeOut(3000);
             $('ul.pagination').hide();
             $('.infinite-scroll').jscroll({
                 autoTrigger: true,

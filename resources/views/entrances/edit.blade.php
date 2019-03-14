@@ -29,7 +29,7 @@
 			<td>
 	            <select id="category" name="category" class="form-control mb-2">
 	                @foreach ($categoryList as $category)
-	                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+	                    <option value="{{ $category->id }}">{{ $category->ja_name }}</option>
 	                @endforeach
 	            </select>
 	        </td>
