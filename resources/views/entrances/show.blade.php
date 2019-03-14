@@ -29,7 +29,7 @@
 		<tr class="align-top"><th class="text-center"><i class="fas fa-map-marker-alt mr-4"></i></th><td class="pb-3">{{ $entrance->address }}</td></tr>
 		<tr class="align-top"><th class="text-center"><i class="fas fa-comment mr-4"></i></th>
 			<td class="pb-3">{{ $entrance->detail }}<br>
-			<small>{{ $entrance->created_at }}に投稿</small></td>
+			<small>{{ date('Y年m月d日 H時i分', strtotime($entrance->created_at)) }}に投稿</small></td>
 		</tr>
 		<tr><th></th><td class="text-right"><small><a class="text-secondary" href="{{ action('EntrancesController@claim', $entrance->id) }}">間違いを報告</a></small></td></tr>
 	</table>
