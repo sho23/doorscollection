@@ -25,8 +25,10 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
-
+    protected function redirectTo() {
+        session()->flash('flash_message', '認証が完了しました。');
+        return '/home';
+    }
     /**
      * Create a new controller instance.
      *
