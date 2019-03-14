@@ -399,12 +399,12 @@ ul.row {
 	display: none;
 }
 
-.entrance-list .fixed-bottom .active {
-	border-top: 5px solid #efc055 !important;
+.entrance-list .fixed-bottom .text-warning.active {
+	border-top: 5px solid #efc055;
 }
 
 .entrance-list .fixed-bottom .text-danger.active {
-	border-top: 5px solid #cb514e !important;
+	border-top: 5px solid #cb514e;
 }
 
 
