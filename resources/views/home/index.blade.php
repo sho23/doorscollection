@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'グロリアの扉コレクション')
-@section('class', 'entrance-list')
+@section('class', 'entrance-list pb-5')
 @section('content')
 @include('layouts.header')
  @if (session('flash_message'))
