@@ -62,6 +62,7 @@
                 <li class="text-center"><a href="{{ action('HomeController@policy') }}">プライバシーポリシー</a></li>
                 <li class="text-center"><a href="{{ action('HomeController@qa') }}">Q&A</a></li>
                 <li class="text-center"><a href="http://team-jokers.tokyo" target="_blank">運営会社</a></li>
+                <li class="text-center"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdzTPfhYemEFK4TL0N75bUemzVVTsyr2GR5N60MGPOV-C8GzA/viewform" target="_blank">アンケート</a></li>
                 @guest
                     <li class="text-center"><a href="{{ route('login') }}" class="text-danger"><strong>ログイン</strong></a></li>
                 @else
