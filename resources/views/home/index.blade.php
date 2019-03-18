@@ -91,13 +91,6 @@
 @endsection
 @push('js')
     <script>
-        $('.upload_button').click(function() {
-            $('#file').click();
-            return false;
-        });
-       $('#file').change(function() {
-            $('.entrance-form').submit();
-        });
         $(function() {
             $('.alert-success').fadeOut(3000);
             $('ul.pagination').hide();

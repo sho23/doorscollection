@@ -88,6 +88,15 @@
                 $('#simple-menu').sidr();
             });
         }
+        $('.upload_button').click(function() {
+            $('#file').click();
+            return false;
+        });
+        $('#file').change(function() {
+            $('.entrance-form').submit();
+            $('.container-fluid').css('opacity', '0.1');
+            $('#loading').show();
+        });
     </script>
     @stack('js')
 </body>
