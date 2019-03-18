@@ -64,12 +64,12 @@
         var autocomplete = new google.maps.places.Autocomplete(input);
         autocomplete.addListener('place_changed', function() {
             var place = autocomplete.getPlace();
-            var txt = place.formatted_address;
-            var str = txt.split('〒');
+            var addr = place.formatted_address;
+            var str = addr.split('〒');
             if (str[0] == "日本、") {
-                var short_addr = str[1].slice(9);
+                var addr = str[1].slice(9);
             };
-            $('#address').val(short_addr);
+            $('#address').val(addr);
             $('.mapControls').val(this.getPlace().name);
             $('input[name="lat"]').val(place.geometry.location.lat());
             $('input[name="lng"]').val(place.geometry.location.lng());
