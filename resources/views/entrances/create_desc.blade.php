@@ -33,6 +33,7 @@
                         <div class="form-group">
                             <label for="category">店のジャンル</label>
                             <select id="category" name="category" class="form-control">
+                                <option value="">--店のジャンルを選択--</option>
                                 @foreach ($categoryList as $category)
                                     <option value="{{ $category->id }}" {{ $category->id == old('category') ? 'selected' : null }}>{{ $category->ja_name }}</option>
                                 @endforeach
@@ -63,7 +64,12 @@
         var autocomplete = new google.maps.places.Autocomplete(input);
         autocomplete.addListener('place_changed', function() {
             var place = autocomplete.getPlace();
-            $('#address').val(place.formatted_address);
+            var txt = place.formatted_address;
+            var str = txt.split('〒');
+            if (str[0] == "日本、") {
+                var short_addr = str[1].slice(9);
+            };
+            $('#address').val(short_addr);
             $('.mapControls').val(this.getPlace().name);
             $('input[name="lat"]').val(place.geometry.location.lat());
             $('input[name="lng"]').val(place.geometry.location.lng());

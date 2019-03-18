@@ -146,6 +146,7 @@ return [
         'detail' => 'お店の説明',
         'email' => 'メールアドレス',
         'password' => 'パスワード',
+        'category' => '店のジャンル'
     ],
 
 ];
