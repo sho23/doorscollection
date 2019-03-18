@@ -78,10 +78,6 @@ ul.row {
 	border-top: 2px;
 }
 
-.select-range {	
-	border-top: 1px solid rgba(0,0,0,.125) !important;	
-}
-
 /***********  リストヘッダー  ************/
 .entrance-list header a span, .single-page header a span {
 	font-size: 16px;
@@ -457,6 +453,28 @@ ul.row {
 .single-page .usage, .qa-page .usage {
 	padding-top: 65px;
 	padding-bottom: 100px;
+}
+
+/* fontawesomeアイコンの上書き */
+.searchbox-inner .fa-chevron-left {
+	transform: rotate(-45deg);
+}
+
+.searchbox-inner {
+	list-style: none;
+	padding-left: 10px;
+	background: #FFF;
+	margin-bottom: 0;
+}
+
+.searchbox-inner ul {
+	list-style: none;
+	padding: 0;
+}
+
+.keyword-box {
+	width: 230px;
+	margin-left: 5px;
 }
 
 /*pcのためのCSS*/

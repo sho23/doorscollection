@@ -24,10 +24,11 @@
     </div>
     <div class="card">
         <div class="card-header">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item bg-gray select-range">
+            <ul class="searchbox-inner">
+                <li class="select-range">
                     <div class="button-radio">
-                        <span class="list-inline-item mx-2 lead"><i class="fas fa-map-marker-alt"></i></span>
+                        <span class="mx-2 lead"><i class="fas fa-chevron-left"></i></span>
+                        <span class="mx-2 lead"><i class="fas fa-map-marker-alt"></i></span>
                         <input id="non" type="radio" name="range" value="0" {{ empty($range) ? 'checked="checked"' : '' }}>
                         <label for="non">指定しない</label>
                         <input id="1km" type="radio" name="range" value="1" {{ $range == 1 ? 'checked="checked"' : '' }}>
@@ -36,24 +37,23 @@
                         <label for="100m" class="ml-2" >100m圏内</label>
                     </div>
                 </li>
-                <li class="list-group-item py-1">
-                    <ul class="list-inline">
+                <li class="py-1">
+                    <ul>
                         <div class="row">
-                            <li class="list-inline-item mx-2 lead"><i class="fas fa-search"></i></li>
-                            <li class="col-10 list-inline-item">
+                            <li class="mx-2 lead"><i class="fas fa-chevron-left"></i></li>
+                            <li class="mx-2 lead"><i class="fas fa-search"></i></li>
+                            <li class="keyword-box">
                                 <input type="text" name="keyword" value="{{ $keyword }}" class="keyword form-control align-middle" placeholder="目的地か住所を入力してください">
                             </li>
                         </div>
                     </ul>
                 </li>
-                <li class="list-group-item py-1 py-2">
-                    <ul class="list-inline">
-                        <div class="row">
-                            <li class="col-10 offset-1 list-inline-item">
-                                <button class="btn btn-success btn btn-block">入り口写真を検索</button>
-                            </li>
+                <li class="py-2">
+                    <div class="row">
+                        <div class="col-10 offset-1 pb-2">
+                            <button class="btn btn-success btn btn-block">入り口写真を検索</button>
                         </div>
-                    </ul>
+                    </div>
                 </li>
             </ul>
         </div>
