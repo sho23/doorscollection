@@ -64,6 +64,7 @@ class SocialController extends Controller
             $user = User::create([
                 'name'   => $providerUser->getName(),
                 'email'  => $providerUser->getEmail(),
+                'email_verified_at' => date('Y-m-d H:i:s'),
                 // 'avatar' => $providerUser->getAvatar(),
             ]);
             $account->user()->associate($user);
