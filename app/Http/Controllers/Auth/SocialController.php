@@ -62,12 +62,11 @@ class SocialController extends Controller
             'provider'         => $provider,
         ]);
 
-        if (User::where('email', $providerUser->getEmail())->exists()) {
-            return;
-        }
-
         if (empty($account->user))
         {
+            if (User::where('email', $providerUser->getEmail())->exists()) {
+                return;
+            }
             $user = User::create([
                 'name'   => $providerUser->getName(),
                 'email'  => $providerUser->getEmail(),
