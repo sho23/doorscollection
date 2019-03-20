@@ -72,6 +72,18 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-12 mt-2 mb-4">
+            <div class="card auth-form">
+                <div class="card-header">ソーシャルログイン</div>
+                    <div class="card-body">
+                        <div class="row text-center">
+<!--                             <a class="btn btn-default btn-block" href="/login/facebook" style="color: #FFF; background:#4867ad;">facebookでログイン</a> -->
+                            <a class="btn btn-default btn-block" href="/login/twitter" style="color: #FFF; background:#5babea;">twitterでログイン</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
