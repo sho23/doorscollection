@@ -4,6 +4,11 @@
 @section('content')
 @include('layouts.header')
 <div class="container pt-5">
+@if (session('faild'))
+    <div class="alert alert-danger">
+        {{ session('faild') }}
+    </div>
+@endif
     <div class="row justify-content-center">
         <div class="text-center my-2 col-12">
             <p class="text-left">ユーザー登録すると、いいねや画像投稿ができマス。ぜひ一緒にコレクションを充実させていきまショウ！！</p>

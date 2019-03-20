@@ -5,9 +5,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use Socialite;
-
 use App\User;
 use App\SocialAccount;
+use Exception;
 
 class SocialController extends Controller
 {
@@ -23,10 +23,13 @@ class SocialController extends Controller
         try {
             $twitterUser = Socialite::driver('twitter')->user();
         } catch (Exception $e) {
-            return redirect('login/twitter');
+            return redirect('login')->with('faild', "認証に失敗しました。");
         }
 
         $user = $this->createOrGetUser($twitterUser, 'twitter');
+        if (empty($user)) {
+            return redirect()->route('login')->with('faild', "認証に失敗しました。すでに登録されているメールアドレスです。");
+        }
         Auth::login($user, true);
 
         return redirect($this->redirectTo);
@@ -59,12 +62,17 @@ class SocialController extends Controller
             'provider'         => $provider,
         ]);
 
+        if (User::where('email', $providerUser->getEmail())->exists()) {
+            return;
+        }
+
         if (empty($account->user))
         {
             $user = User::create([
                 'name'   => $providerUser->getName(),
                 'email'  => $providerUser->getEmail(),
                 'email_verified_at' => date('Y-m-d H:i:s'),
+                'twitter_name' => $providerUser->getNickname(),
                 // 'avatar' => $providerUser->getAvatar(),
             ]);
             $account->user()->associate($user);
