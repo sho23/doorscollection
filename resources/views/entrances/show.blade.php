@@ -44,7 +44,7 @@
 </div>
 <div class="card">
 	<ul class="row react-buttons">
-		<li class="col text-white bg-info"><a href="http://twitter.com/share?url={{ Request::url() }}" target="_blank" class="p-3"><i class="fab fa-twitter"></i>　Twitter</a></li>
+		<li class="col text-white bg-info"><a href="http://twitter.com/share?url={{ Request::url() }}&text=こんな外観だよ！%0a%0a&via=team_jokers2018&hashtags=ドアコレ" target="_blank" class="p-3"><i class="fab fa-twitter"></i>　Twitter</a></li>
 		<li class="col text-white bg-primary"><a href="https://www.facebook.com/sharer/sharer.php?u={{ Request::url() }}" target="_blank" class="p-3"><i class="fab fa-facebook-f"></i>　Facebook</a></li>
 		@if(Auth::user() != null)
 			<li class="col text-white bg-danger">
