@@ -477,6 +477,10 @@ ul.row {
 	margin-left: 5px;
 }
 
+canvas {
+	display: none;
+}
+
 /*pcのためのCSS*/
 @media (min-width: 480px) {
 	body {
