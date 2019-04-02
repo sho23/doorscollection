@@ -128,12 +128,15 @@ class EntrancesController extends Controller
             $img->save('storage/img/500/500x500_' . $filename);
             $img->resize(150, 150);
             $img->save('storage/img/150/150x150_' . $filename);
-            return redirect()->route('entrances.createDesc', ['filename' => $filename]);
+            return response()->json([
+                'result' => true,
+                'request' => $filename
+            ]);
         } else {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->withErrors(['file' => '画像がアップロードされていないか不正なデータです。']);
+            return response()->json([
+                'result' => false,
+                'request' => '画像がアップロードされていないか不正なデータです。'
+            ]);
         }
     }
 
