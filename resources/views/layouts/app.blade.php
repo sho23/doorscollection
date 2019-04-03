@@ -50,6 +50,7 @@
 
       gtag('config', 'UA-135750696-1');
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
 </head>
 <body class="@yield('parentClass', 'fixed-page')">
     <div id="loading"><img src="{{ asset('image/loading.gif') }}"></div>
@@ -129,41 +130,58 @@
                 var ctx = canvas[0].getContext('2d');
                 // canvasに既に描画されている画像をクリア
                 ctx.clearRect(0,0,width,height);
-                // canvasにサムネイルを描画
-                ctx.drawImage(image,0,0,image.width,image.height,0,0,width,height);
 
-                // canvasからbase64画像データを取得
-                var base64 = canvas.get(0).toDataURL('image/jpeg');
-                // base64からBlobデータを作成
-                var barr, bin, i, len;
-                bin = atob(base64.split('base64,')[1]);
-                len = bin.length;
-                barr = new Uint8Array(len);
-                i = 0;
-                while (i < len) {
-                  barr[i] = bin.charCodeAt(i);
-                  i++;
-                }
-                blob = new Blob([barr], {type: 'image/jpeg'});
+                EXIF.getData(file, function(){
+                  var orientation = file.exifdata.Orientation;
+                  if(orientation === undefined){
+                      orientation = 1;
+                  }
 
-                var name, fd = new FormData();
-                fd.append('file', blob); // ファイルを添付する
-                $.ajax({
-                  headers: {
-                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                  },
-                  url: "{{ action('EntrancesController@store') }}", // 送信先
-                  type: 'POST',
-                  dataType: 'json',
-                  data: fd,
-                  processData: false,
-                  contentType: false
-                })
-                .done(function( data, textStatus, jqXHR ) {
-                  location.href = "{{ url('entrances/create_desc/') }}?filename=" + data.request;
-                })
-                .fail(function( jqXHR, textStatus, errorThrown ) {
-                  alert('画像アップロードに失敗しました。画面を更新してもう一度お試しください。');
+                  switch (orientation) {
+                    case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
+                    case 3: ctx.transform(-1, 0, 0, -1, width, height); break;
+                    case 4: ctx.transform(1, 0, 0, -1, 0, height); break;
+                    case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
+                    case 6: ctx.transform(0, 1, -1, 0, height, 0); break;
+                    case 7: ctx.transform(0, -1, -1, 0, height, width); break;
+                    case 8: ctx.transform(0, -1, 1, 0, 0, width); break;
+                  }
+                  // canvasにサムネイルを描画
+                  ctx.drawImage(image,0,0,image.width,image.height,0,0,width,height);
+
+                  // canvasからbase64画像データを取得
+                  var base64 = canvas.get(0).toDataURL('image/jpeg');
+                  // base64からBlobデータを作成
+                  var barr, bin, i, len;
+                  bin = atob(base64.split('base64,')[1]);
+                  len = bin.length;
+                  barr = new Uint8Array(len);
+                  i = 0;
+                  while (i < len) {
+                    barr[i] = bin.charCodeAt(i);
+                    i++;
+                  }
+                  blob = new Blob([barr], {type: 'image/jpeg'});
+
+                  var name, fd = new FormData();
+                  fd.append('file', blob); // ファイルを添付する
+                  $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "{{ action('EntrancesController@store') }}", // 送信先
+                    type: 'POST',
+                    dataType: 'json',
+                    data: fd,
+                    processData: false,
+                    contentType: false
+                  })
+                  .done(function( data, textStatus, jqXHR ) {
+                    location.href = "{{ url('entrances/create_desc/') }}?filename=" + data.request;
+                  })
+                  .fail(function( jqXHR, textStatus, errorThrown ) {
+                    alert('画像アップロードに失敗しました。画面を更新してもう一度お試しください。');
+                  });
                 });
               }
               image.src = e.target.result;
