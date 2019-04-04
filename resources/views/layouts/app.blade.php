@@ -137,6 +137,16 @@
                       orientation = 1;
                   }
 
+                  if ([5,6,7,8].indexOf(orientation) > -1) {
+                    canvas.width = image.height
+                    canvas.height = image.width
+                    $('#canvas').attr('width', height)
+                    $('#canvas').attr('height', width)
+                  } else {
+                    canvas.width = image.width
+                    canvas.height = image.height
+                  }
+
                   switch (orientation) {
                     case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
                     case 3: ctx.transform(-1, 0, 0, -1, width, height); break;
