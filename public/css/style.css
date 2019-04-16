@@ -334,6 +334,19 @@ ul.row {
 	display: none;
 }
 
+.form-wrapper {
+	border: 1px solid #f6f6f6;
+    border-radius: 5px;
+}
+
+.form-wrapper label {
+	font-weight: bold;
+}
+
+.form-wrapper .card {
+	background: #FDFDFD;
+}
+
 .category-list input[type=checkbox] {
 	display: none;
 }
