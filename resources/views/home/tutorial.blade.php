@@ -57,6 +57,7 @@
                             <a href="{{ action('HomeController@index') }}" class="btn btn btn-outline-info">SKIP</a>
                         </div>
                         <div class="m-2">
+                            <span class="icon-arrow">→</span>
                             <img src="{{ asset('image/tutorial/tutorial01.png') }}">
                             <div class="tutorial-footer">
                                 <h6>目的地周辺で迷子になったら、ドアコレで入口写真の絞り込み検索をしてみよう！</h6>
@@ -122,12 +123,6 @@
                             </div>
                         </div>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon d-none" aria-hidden="false"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon d-none" aria-hidden="false"></span>
-                    </a>
                 </div>
             </div>
         </div>
