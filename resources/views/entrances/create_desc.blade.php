@@ -28,11 +28,11 @@
                         <input type="hidden" name="open_hours" value="">
                         <div class="form-group" id="name-input">
                             <label for="name">名前</label>
-                            <input id="searchMapInput" class="mapControls form-control form-control-sm" name="name" type="text" value="{{ old('name') }}" placeholder="例) タリーズ　たまプラーザ駅前店">
+                            <input id="searchMapInput" class="mapControls form-control form-control-sm" name="name" type="text" value="{{ old('name') }}" placeholder="例) タリーズ　たまプラーザ駅前店" required>
                         </div>
                         <div class="form-group">
                             <label for="address">住所</label>
-                            <input type="text" class="form-control form-control-sm" name="address" id="address" value="{{old('address')}}" placeholder="例) 神奈川県横浜市青葉区新石川1-2-15">
+                            <input type="text" class="form-control form-control-sm" name="address" id="address" value="{{old('address')}}" placeholder="例) 神奈川県横浜市青葉区新石川1-2-15" required>
                         </div>
                         <div class="form-group">
                             <label for="category">店のジャンル</label>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="form-group">
                             <label for="detail">お店の説明</label>
-                            <textarea name="detail" rows="4" cols="40" id="detail" value="{{old('detail')}}" class="form-control form-control-sm">例) 駅直通の渡り廊下にある。改札徒歩2分。</textarea>
+                            <textarea name="detail" rows="4" cols="40" id="detail" class="form-control form-control-sm" placeholder="例) 駅直通の渡り廊下にある。改札徒歩2分。" required>{{old('detail')}}</textarea>
                         </div>
                         <div class="card-body text-center">
                             {!! Form::submit('投稿', ['class' => 'btn btn-success']) !!}
