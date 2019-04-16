@@ -60,6 +60,7 @@
                 <li class="text-center p-2"><img src="{{ asset('image/ic_gloria.png') }}" class="rounded-circle" alt="" width="100"></li>
                 <li class="text-center"><a href="{{ action('HomeController@index') }}">ホーム</a></li>
                 <!-- <li class="text-center"><a href="#">お知らせ</a></li> -->
+                <li class="text-center"><a href="{{ action('HomeController@tutorial') }}">使い方</a></li>
                 <li class="text-center"><a href="{{ action('HomeController@policy') }}">プライバシーポリシー</a></li>
                 <li class="text-center"><a href="{{ action('HomeController@qa') }}">Q&A</a></li>
                 <li class="text-center"><a href="http://team-jokers.tokyo" target="_blank">運営会社</a></li>
