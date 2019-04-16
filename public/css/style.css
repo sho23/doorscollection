@@ -110,7 +110,7 @@ body.sidr-open {
 	opacity: 0.8;
 }
 
-.sidr-open .fixed-bottom {
+.sidr-open .fixed-top, .sidr-open .fixed-bottom {
 	position: absolute;
 }
 
@@ -378,12 +378,6 @@ body.sidr-open {
 
 .category-list input:checked + label img {
 	opacity: 0.7;
-}
-
-.fixed-top {
-	right: inherit;
-	left: inherit;
-	width: 100%;
 }
 
 .gallery > .infinite-scroll {
