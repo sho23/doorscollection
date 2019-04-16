@@ -98,7 +98,7 @@ body.sidr-open {
 	position: fixed !important;
 }
 
-.sidr-open .entrance-list .sidr-cover {
+.sidr-open .sidr-cover {
 	position:absolute;
 	top:0;
 	right:0;
