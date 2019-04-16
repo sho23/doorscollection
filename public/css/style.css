@@ -94,6 +94,26 @@ ul.row {
 	width: 16px;
 }
 
+body.sidr-open {
+	position: fixed !important;
+}
+
+.sidr-open .entrance-list .sidr-cover {
+	position:absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	z-index:1500;
+	pointer-events:auto;
+	background-color: #c6c6c6;
+	opacity: 0.8;
+}
+
+.sidr-open .fixed-bottom {
+	position: absolute;
+}
+
 .bars-menu a {
 	font-size: 20px;
 }

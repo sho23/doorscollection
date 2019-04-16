@@ -96,6 +96,10 @@
             $('#file').click();
             return false;
         });
+        $('.sidr-cover').click(function() {
+            $('#simple-menu').click();
+            return false;
+        });
 
         $('#file').change(function() {
             file = $(this).prop('files')[0];
