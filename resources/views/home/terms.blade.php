@@ -178,15 +178,7 @@
         <div class="mx-4">
             <p class="text-right">2019年3月1日制定</p>
         </div>
-<div class="btn-group d-flex fixed-bottom bg-white">
-    <a href="{{ action('HomeController@index') }}" class="btn btn-outline-light w-100 text-warning py-3"><i class="fas fa-search mr-3"></i>SEARCH</a>
-    @guest
-        <a href="{{ route('login') }}" class="btn btn-outline-light w-100 text-danger py-3"><i class="fas fa-camera mr-3"></i>POST</a>
-    @else
-        <a href="#" class="upload_button btn btn-outline-light w-100 text-danger py-3"><i class="fas fa-camera mr-3"></i>POST</a>
-    @endguest
+    </div>
 </div>
-{!! Form::open(['route' => ['entrances.store'], 'method' => 'post', 'files' => true, 'class' => 'entrance-form']) !!}
-{!! Form::file('file', ['id' => 'file']) !!}
-{!! Form::close() !!}
+@include('layouts.footer')
 @endsection
