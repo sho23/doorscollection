@@ -85,9 +85,9 @@ ul.row {
 }
 
 .entrance-list header, .single-page header {
-	padding-top: 11px;
-	padding-bottom: 7px;
-	line-height: 36px;
+	height: 48px;
+    box-sizing: border-box;
+    padding-top: 10px;
 }
 
 .entrance-list header i {
@@ -488,6 +488,7 @@ canvas {
 	}
 	.fixed-bottom {
 		left: 260px;
+		border-top: 1px solid #EEE;
 	}
 	.entrance-list, .detail, .top, .single-page {
 		max-width: 500px;

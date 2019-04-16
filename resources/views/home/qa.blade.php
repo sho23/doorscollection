@@ -180,7 +180,7 @@
         <hr>
         <div id="section27" class="mx-4">
             <h6>27  店名があっているはずなのに検索結果に出てこないのはなぜ？</h6>
-            <p>店名の表記はあっていますでしょうか？カタカナ、ローマ字など、店名表記を変えて検索をしてみてください。もしくは、まだ登録されていない店かもしれません。ここから要望をしてみてください。</p>
+            <p>店名の表記はあっていますでしょうか？カタカナ、ローマ字など、店名表記を変えて検索をしてみてください。もしくは、まだ登録されていない店かもしれません。<a href="https://docs.google.com/forms/d/e/1FAIpQLSdzTPfhYemEFK4TL0N75bUemzVVTsyr2GR5N60MGPOV-C8GzA/viewform" target="_blank">ここから</a>要望をしてみてください。</p>
         </div>
         <hr>
         <div id="section28" class="mx-4">
@@ -194,17 +194,7 @@
         </div>
     </div>
 </div>
-<div class="btn-group d-flex fixed-bottom bg-white">
-    <a href="{{ action('HomeController@index') }}" class="btn btn-outline-light w-100 text-warning py-3"><i class="fas fa-search mr-3"></i>SEARCH</a>
-    @guest
-        <a href="{{ route('login') }}" class="btn btn-outline-light w-100 text-danger py-3"><i class="fas fa-camera mr-3"></i>POST</a>
-    @else
-        <a href="#" class="upload_button btn btn-outline-light w-100 text-danger py-3"><i class="fas fa-camera mr-3"></i>POST</a>
-    @endguest
-</div>
-{!! Form::open(['route' => ['entrances.store'], 'method' => 'post', 'files' => true, 'class' => 'entrance-form']) !!}
-{!! Form::file('file', ['id' => 'file']) !!}
-{!! Form::close() !!}
+@include('layouts.footer')
 @endsection
 @push('js')
 <script>

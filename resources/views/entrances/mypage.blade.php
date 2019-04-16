@@ -41,14 +41,7 @@
         </div>
     @endif
 </div>
-<div class="btn-group d-flex fixed-bottom bg-white">
-    <p class="mx-auto my-2 copywriter">© 2019 JOKERS LLC.</p>
-    <a href="{{ action('HomeController@index') }}" class="btn btn-outline-light w-100 text-warning py-3"><i class="fas fa-search mr-3"></i>SEARCH</a>
-    <a href="#" class="upload_button btn btn-outline-light w-100 text-danger py-3 active"><i class="fas fa-camera mr-3"></i>POST</a>
-</div>
-{!! Form::open(['route' => ['entrances.store'], 'method' => 'post', 'files' => true, 'class' => 'entrance-form']) !!}
-{!! Form::file('file', ['id' => 'file']) !!}
-{!! Form::close() !!}
+@include('layouts.footer')
 @endsection
 @push('js')
     <script>
