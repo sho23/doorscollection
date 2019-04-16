@@ -24,6 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home.index');
 Route::get('/policy', 'HomeController@policy')->name('home.policy');
 Route::get('/terms', 'HomeController@terms')->name('home.terms');
 Route::get('/qa', 'HomeController@qa')->name('home.qa');
+Route::get('/tutorial', 'HomeController@tutorial')->name('home.tutorial');
 Route::resource('users', 'UserController');
 Route::get('/leave', 'UserController@leave')->name('users.leave');
 Route::post('/leavingStore', 'UserController@leavingStore')->name('users.leavingStore');

@@ -482,6 +482,56 @@ body.sidr-open {
 	padding-bottom: 100px;
 }
 
+/***********  チュートリアルページ  ************/
+.carousel-item img {
+	width: 270px;
+}
+.carousel-indicators li {
+	background: #f6f6f6;
+}
+
+.carousel-indicators .active {
+	background: #c3c3c3;
+}
+
+.tutorial-header .btn {
+	width: 75px;
+}
+.tutorial-header {
+	position: relative;
+    height: 62px;
+    overflow-x: hidden;
+    margin-bottom: -36px;
+}
+.tutorial-header .ribbon {
+	position: absolute;
+	width: 170px;
+	background: #ecd259;
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	color: #FFF;
+	transform: rotate(-25deg) translate(-37px, -10px);
+}
+
+.tutorial-header a {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+
+.tutorial-footer {
+	height: 100px;
+}
+.tutorial-footer h6 {
+	width: 250px;
+	color: #000 !important;
+    margin: 0 auto;
+}
+.ribbon-wrapper {
+	position: relative;
+}
+
 /* fontawesomeアイコンの上書き */
 .searchbox-inner .fa-chevron-left {
 	transform: rotate(-45deg);
