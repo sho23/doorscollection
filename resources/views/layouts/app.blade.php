@@ -97,7 +97,7 @@
             return false;
         });
         $('.sidr-cover').click(function() {
-            $('#simple-menu').click();
+            $.sidr('close', 'sidr')
             return false;
         });
 
