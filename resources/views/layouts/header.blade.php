@@ -1,3 +1,4 @@
+<div class="sidr-cover"></div>
 <div class="fixed-top">
     <header class="px-1">
         <ul class="row">
