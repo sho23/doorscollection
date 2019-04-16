@@ -83,6 +83,11 @@ class HomeController extends Controller
         return view('home.qa');
     }
 
+    public function tutorial()
+    {
+        return view('home.tutorial');
+    }
+
     private function distance($startLat, $startLng, $endLat, $endLng)
     {
         $latDist = ($startLat - $endLat);if($latDist<0)$latDist=$latDist*-1;
