@@ -606,6 +606,9 @@ canvas {
 
 	.fixed-top {
 		max-width: 500px;
+		width: 100%;
+		right: inherit;
+		left: inherit;
 	}
 
 	#sidr {
