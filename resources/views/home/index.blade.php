@@ -51,7 +51,7 @@
                 <li class="py-2">
                     <div class="row">
                         <div class="col-10 offset-1 pb-2">
-                            <button class="btn btn-success btn btn-block">入り口写真を検索</button>
+                            <button class="btn btn-success btn btn-block">入り口写真を絞り込み</button>
                         </div>
                     </div>
                 </li>
