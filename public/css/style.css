@@ -503,7 +503,11 @@ body.sidr-open {
 	position: relative;
     height: 62px;
     overflow-x: hidden;
-    margin-bottom: -36px;
+    margin-bottom: -30px;
+}
+
+.tutorial-header a {
+	z-index: 100;
 }
 
 .tutorial-header .ribbon {

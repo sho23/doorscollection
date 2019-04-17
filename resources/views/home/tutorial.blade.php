@@ -54,7 +54,7 @@
                     <div class="carousel-item text-center active">
                         <div class="d-flex tutorial-header">
                             <span class="ribbon">使い方</span>
-                            <a href="{{ action('HomeController@index') }}" class="btn btn btn-outline-info">SKIP</a>
+                            <a href="{{ action('HomeController@index') }}" class="btn btn-sm btn-outline-info">SKIP</a>
                         </div>
                         <div class="m-2">
                             <span class="icon-arrow">→</span>
@@ -67,7 +67,7 @@
                     <div class="carousel-item text-center">
                         <div class="d-flex tutorial-header">
                             <span class="ribbon">使い方</span>
-                            <a href="{{ action('HomeController@index') }}" class="btn btn btn-outline-info">SKIP</a>
+                            <a href="{{ action('HomeController@index') }}" class="btn btn-sm btn-outline-info">SKIP</a>
                         </div>
                         <div class="m-2">
                             <img src="{{ asset('image/tutorial/tutorial02.png') }}">
@@ -79,7 +79,7 @@
                     <div class="carousel-item text-center">
                         <div class="d-flex tutorial-header">
                             <span class="ribbon">使い方</span>
-                            <a href="{{ action('HomeController@index') }}" class="btn btn btn-outline-info">SKIP</a>
+                            <a href="{{ action('HomeController@index') }}" class="btn btn-sm btn-outline-info">SKIP</a>
                         </div>
                         <div class="m-2">
                             <img src="{{ asset('image/tutorial/tutorial03.png') }}">
@@ -91,7 +91,7 @@
                     <div class="carousel-item text-center">
                         <div class="d-flex tutorial-header">
                             <span class="ribbon">使い方</span>
-                            <a href="{{ action('HomeController@index') }}" class="btn btn btn-outline-info">SKIP</a>
+                            <a href="{{ action('HomeController@index') }}" class="btn btn-sm btn-outline-info">SKIP</a>
                         </div>
                         <div class="m-2">
                             <img src="{{ asset('image/tutorial/tutorial04.png') }}">
@@ -103,7 +103,7 @@
                     <div class="carousel-item text-center">
                         <div class="d-flex tutorial-header">
                                 <span class="ribbon">使い方</span>
-                            <a href="{{ action('HomeController@index') }}" class="btn btn btn-outline-info">SKIP</a>
+                            <a href="{{ action('HomeController@index') }}" class="btn btn-sm btn-outline-info">SKIP</a>
                         </div>
                         <div class="m-2">
                             <img src="{{ asset('image/tutorial/tutorial05.png') }}">
