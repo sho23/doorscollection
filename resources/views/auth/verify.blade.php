@@ -20,6 +20,9 @@
                     <a href="{{ route('verification.resend') }}">認証メールを再送する場合はこちら</a>
                 </div>
             </div>
+            <div class="m-4 text-center">
+                <a href="{{ action('HomeController@tutorial') }}" class="btn btn-success">使い方へ進む →</a>
+            </div>
         </div>
     </div>
 </div>
